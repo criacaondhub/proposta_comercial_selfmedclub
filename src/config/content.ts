@@ -10,3 +10,9 @@ export const CONFIG = {
   // ⚠️ PREENCHER
   COMPANY_NAME: '⚠️ PREENCHER',
 } as const
+
+export const NAVIGATION = {
+  previous: 'Slide anterior',
+  next: 'Próximo slide',
+  progress: 'Progresso da apresentação',
+} as const

@@ -30,7 +30,7 @@ A apresentação alterna dois tipos de slide: **claro** (padrão, `#dcddcf`) e *
 |---|---|---|---|---|
 | `background-section` | `#1e3fa8` | `bg-background-section` | Fundo dos slides de destaque | — |
 | `section-heading` | `#fafafa` | `text-section-heading` | Títulos e subtítulos | 8.6 |
-| `section-text` | `#c5c5c5` | `text-section-text` | Texto corrido | 5.2 |
+| `section-text` | `#dcddcf` | `text-section-text` | Texto corrido | 6.6 |
 | `section-muted` | `rgba(250,250,250,0.7)` | `text-section-muted` | Legendas, rótulos, numeração | ≥ 4.5 |
 | `section-accent` | `#fafafa` | `bg-section-accent` / `text-section-accent` | CTAs e destaques em slide azul | 8.6 |
 | `section-accent-hover` | `#dcddcf` | `hover:bg-section-accent-hover` | Hover de elementos com `section-accent` | — |
