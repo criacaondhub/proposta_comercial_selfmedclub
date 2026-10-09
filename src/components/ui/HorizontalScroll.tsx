@@ -1,67 +1,108 @@
-import { Children, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
-import { motion, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
+import {
+  Children,
+  isValidElement,
+  useEffect,
+  useState,
+  type ComponentType,
+  type ReactNode,
+} from 'react'
+import { animate, motion, useMotionValue, useReducedMotion } from 'framer-motion'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { lenis } from '@/lib/lenis'
 import { SlideProgress } from '@/components/ui/SlideProgress'
+import { SlideStepsContext } from '@/lib/slide-steps'
 
 type HorizontalScrollProps = {
   children: ReactNode
+  /** Slides (componentes) que entram subindo por cima do anterior, em vez de virem da direita */
+  enterFromBottom?: ComponentType[]
+  /** Slides (componentes) que entram descendo por cima do anterior */
+  enterFromTop?: ComponentType[]
+  /** Slides com etapas internas: as setas percorrem as etapas antes de trocar de slide */
+  steps?: { component: ComponentType; count: number }[]
 }
 
 const NEXT_KEYS = ['ArrowRight', 'PageDown']
 const PREVIOUS_KEYS = ['ArrowLeft', 'PageUp']
 
-function HorizontalTrack({ children }: HorizontalScrollProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
-  const [distance, setDistance] = useState(0)
-  const [current, setCurrent] = useState(0)
-  const total = Children.count(children)
+// Transição em camadas: o slide novo desliza por cima e o anterior recua ao fundo.
+// Curva quart in-out longa — arranca suave, cruza rápido e pousa macio
+const TRANSITION = { duration: 1.1, ease: [0.77, 0, 0.175, 1] } as const
 
-  useLayoutEffect(() => {
-    const track = trackRef.current
-    if (!track) return
+type Entry = 'side' | 'bottom' | 'top'
+type Pose = { x: string; y: string; scale: number; borderRadius: number; dim: number }
 
-    const measure = () => setDistance(track.scrollWidth - window.innerWidth)
-    measure()
+const CENTER: Pose = { x: '0%', y: '0%', scale: 1, borderRadius: 0, dim: 0 }
 
-    const observer = new ResizeObserver(measure)
-    observer.observe(track)
-    window.addEventListener('resize', measure)
+// Fora da tela, aguardando a vez (de onde o slide vai entrar)
+const AHEAD: Record<Entry, Pose> = {
+  side: { ...CENTER, x: '100%' },
+  bottom: { ...CENTER, y: '100%' },
+  top: { ...CENTER, y: '-100%' },
+}
 
-    return () => {
-      observer.disconnect()
-      window.removeEventListener('resize', measure)
-    }
-  }, [])
+// Recuado ao fundo, sob o slide que entrou: encolhe, arredonda, escurece e desliza um pouco (parallax)
+// no sentido em que foi empurrado
+const PARKED = { scale: 0.88, borderRadius: 28, dim: 0.65 }
+const BEHIND: Record<Entry, Pose> = {
+  side: { ...CENTER, ...PARKED, x: '-28%' },
+  bottom: { ...CENTER, ...PARKED, y: '-14%' },
+  top: { ...CENTER, ...PARKED, y: '14%' },
+}
 
-  const { scrollYProgress } = useScroll({
-    target: wrapperRef,
-    offset: ['start start', 'end end'],
+/**
+ * Pose de cada slide em relação ao atual:
+ * - atual: centro, em tela cheia
+ * - à frente: fora da tela, do lado por onde vai entrar (direita, abaixo ou acima)
+ * - atrás: recuado ao fundo — sempre coberto pelos slides de cima (z-index crescente)
+ */
+function poseFor(index: number, current: number, entries: Entry[]): Pose {
+  if (index === current) return CENTER
+  if (index > current) return AHEAD[entries[index]]
+  return BEHIND[entries[index + 1] ?? 'side']
+}
+
+// Desktop/tablet: slides travados — só avançam pelos botões (ou setas do teclado), nunca pela rolagem
+function SlideDeck({ children, enterFromBottom = [], enterFromTop = [], steps = [] }: HorizontalScrollProps) {
+  const [position, setPosition] = useState({ current: 0, step: 0 })
+  const { current, step } = position
+  const slides = Children.toArray(children)
+  const total = slides.length
+  const entries = slides.map((slide): Entry => {
+    if (!isValidElement(slide)) return 'side'
+    const type = slide.type as ComponentType
+    if (enterFromBottom.includes(type)) return 'bottom'
+    if (enterFromTop.includes(type)) return 'top'
+    return 'side'
   })
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance])
-
-  useMotionValueEvent(scrollYProgress, 'change', (value) => {
-    setCurrent(Math.round(value * (total - 1)))
-  })
-
-  // Cada slide tem 100vw de largura, então avançar um slide = rolar 1 innerWidth na vertical
-  const goBy = useCallback(
-    (step: number) => {
-      const wrapper = wrapperRef.current
-      if (!wrapper) return
-
-      const slideWidth = window.innerWidth
-      const targetIndex = Math.round((lenis.targetScroll - wrapper.offsetTop) / slideWidth) + step
-      const clampedIndex = Math.min(Math.max(targetIndex, 0), total - 1)
-
-      lenis.scrollTo(wrapper.offsetTop + clampedIndex * slideWidth)
-    },
-    [total],
+  const stepCounts = slides.map((slide) =>
+    isValidElement(slide) ? (steps.find((entry) => entry.component === slide.type)?.count ?? 1) : 1,
   )
+  const progress = useMotionValue(0)
+  const reduceMotion = useReducedMotion()
+
+  // Avança/volta uma etapa; ao passar da primeira ou da última etapa, troca de slide.
+  // Voltando para um slide com etapas, ele abre na última.
+  const goBy = (direction: 1 | -1) =>
+    setPosition((previous) => {
+      const count = stepCounts[previous.current]
+      if (direction > 0 && previous.step < count - 1) return { ...previous, step: previous.step + 1 }
+      if (direction < 0 && previous.step > 0) return { ...previous, step: previous.step - 1 }
+
+      const next = Math.min(Math.max(previous.current + direction, 0), total - 1)
+      if (next === previous.current) return previous
+      return { current: next, step: direction > 0 ? 0 : stepCounts[next] - 1 }
+    })
+
+  useEffect(() => {
+    const target = total > 1 ? current / (total - 1) : 0
+    const controls = animate(progress, target, reduceMotion ? { duration: 0 } : TRANSITION)
+    return () => controls.stop()
+  }, [current, total, progress, reduceMotion])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      // Componentes que tratam as setas por conta própria (ex.: galeria) chamam preventDefault
+      if (event.defaultPrevented) return
       const target = event.target as HTMLElement
       if (target.closest('input, textarea, select, [contenteditable="true"]')) return
 
@@ -76,22 +117,53 @@ function HorizontalTrack({ children }: HorizontalScrollProps) {
 
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [goBy])
+  })
 
   return (
     <>
-      <div ref={wrapperRef} className="relative" style={{ height: `calc(100svh + ${distance}px)` }}>
-        <div className="sticky top-0 h-svh overflow-hidden">
-          <motion.div ref={trackRef} style={{ x }} className="flex h-full w-max will-change-transform">
-            {children}
-          </motion.div>
-        </div>
+      <div className="relative h-svh overflow-hidden bg-background-dark">
+        {slides.map((slide, index) => {
+          const { dim, ...pose } = poseFor(index, current, entries)
+          const transition = reduceMotion ? { duration: 0 } : TRANSITION
+
+          return (
+            <motion.div
+              key={index}
+              className="absolute inset-0 overflow-hidden shadow-2xl will-change-transform"
+              style={{ zIndex: index }}
+              initial={false}
+              animate={pose}
+              transition={transition}
+              aria-hidden={index !== current}
+              inert={index !== current}
+            >
+              <SlideStepsContext.Provider
+                value={{
+                  step: index === current ? step : index < current ? stepCounts[index] - 1 : 0,
+                  setStep: (next) =>
+                    setPosition((previous) => (previous.current === index ? { ...previous, step: next } : previous)),
+                }}
+              >
+                {slide}
+              </SlideStepsContext.Provider>
+
+              {/* Véu que escurece o slide enquanto ele recua */}
+              <motion.div
+                className="pointer-events-none absolute inset-0 z-50 bg-background-dark"
+                initial={false}
+                animate={{ opacity: dim }}
+                transition={transition}
+                aria-hidden
+              />
+            </motion.div>
+          )
+        })}
       </div>
 
       <SlideProgress
         current={current}
         total={total}
-        progress={scrollYProgress}
+        progress={progress}
         onPrevious={() => goBy(-1)}
         onNext={() => goBy(1)}
       />
@@ -99,10 +171,14 @@ function HorizontalTrack({ children }: HorizontalScrollProps) {
   )
 }
 
-export function HorizontalScroll({ children }: HorizontalScrollProps) {
+export function HorizontalScroll({ children, enterFromBottom, enterFromTop, steps }: HorizontalScrollProps) {
   const isDesktop = useMediaQuery('(min-width: 768px)')
 
   if (!isDesktop) return <div className="flex flex-col">{children}</div>
 
-  return <HorizontalTrack>{children}</HorizontalTrack>
+  return (
+    <SlideDeck enterFromBottom={enterFromBottom} enterFromTop={enterFromTop} steps={steps}>
+      {children}
+    </SlideDeck>
+  )
 }

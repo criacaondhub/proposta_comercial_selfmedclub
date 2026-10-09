@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { useSlideTheme } from '@/lib/slide-theme'
-import { Reveal } from '@/components/ui/Reveal'
+import { Reveal, type RevealEffect } from '@/components/ui/Reveal'
 
 type SlideHeadingProps = {
   label?: string
@@ -8,6 +8,7 @@ type SlideHeadingProps = {
   text?: string
   as?: 'h1' | 'h2'
   size?: 'default' | 'display'
+  effect?: RevealEffect
   className?: string
 }
 
@@ -29,16 +30,30 @@ function renderHighlight(title: string, accentClass: string) {
   )
 }
 
-export function SlideHeading({ label, title, text, as: Tag = 'h2', size = 'default', className }: SlideHeadingProps) {
+export function SlideHeading({
+  label,
+  title,
+  text,
+  as: Tag = 'h2',
+  size = 'default',
+  effect,
+  className,
+}: SlideHeadingProps) {
   const theme = useSlideTheme()
 
   return (
-    <Reveal className={cn('flex flex-col gap-item md:gap-item-lg', className)}>
+    <Reveal effect={effect} className={cn('flex flex-col gap-item md:gap-item-lg', className)}>
       {label && <p className={cn('text-sm font-medium uppercase tracking-[0.2em]', theme.muted)}>{label}</p>}
-      <Tag className={cn('max-w-4xl font-semibold leading-[1.05] tracking-tight text-balance', sizeClasses[size], theme.heading)}>
+      <Tag
+        className={cn(
+          'max-w-4xl font-semibold leading-[1.05] tracking-tight text-balance',
+          sizeClasses[size],
+          theme.heading,
+        )}
+      >
         {renderHighlight(title, theme.accent)}
       </Tag>
-      {text && <p className={cn('max-w-2xl text-base leading-relaxed md:text-lg', theme.text)}>{text}</p>}
+      {text && <p className={cn('max-w-2xl font-heading text-base font-light leading-relaxed md:text-lg', theme.text)}>{text}</p>}
     </Reveal>
   )
 }

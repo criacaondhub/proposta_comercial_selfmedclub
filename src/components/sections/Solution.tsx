@@ -10,17 +10,20 @@ const theme = SLIDE_THEME.section
 
 export function Solution() {
   return (
+    // Entrada: título e cards crescem a partir do centro
     <Slide id="solucao" variant="section" className="md:grid md:grid-cols-[1fr_1.2fr] md:items-center">
-      <SlideHeading label={SOLUTION.label} title={SOLUTION.title} text={SOLUTION.text} />
+      <SlideHeading effect="zoom" label={SOLUTION.label} title={SOLUTION.title} text={SOLUTION.text} />
 
-      <Reveal delay={0.15} className="grid gap-item sm:grid-cols-2 md:gap-item-lg">
-        {SOLUTION.pillars.map((pillar) => (
-          <GlassCard key={pillar.title}>
-            <h3 className={cn('text-xl font-semibold', theme.heading)}>{pillar.title}</h3>
-            <p className="leading-relaxed">{pillar.description}</p>
-          </GlassCard>
+      <div className="grid gap-item sm:grid-cols-2 md:gap-item-lg">
+        {SOLUTION.pillars.map((pillar, index) => (
+          <Reveal key={pillar.title} effect="zoom" delay={0.2 + index * 0.12} className="h-full">
+            <GlassCard className="h-full">
+              <h3 className={cn('text-xl font-semibold', theme.heading)}>{pillar.title}</h3>
+              <p className="leading-relaxed">{pillar.description}</p>
+            </GlassCard>
+          </Reveal>
         ))}
-      </Reveal>
+      </div>
     </Slide>
   )
 }

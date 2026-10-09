@@ -34,16 +34,19 @@ function PlanCard({ plan }: { plan: Plan }) {
 
 export function Investment() {
   return (
+    // Entrada: planos viram de baixo para cima em 3D, um após o outro
     <Slide id="investimento">
-      <SlideHeading label={INVESTMENT.label} title={INVESTMENT.title} />
+      <SlideHeading effect="flip" label={INVESTMENT.label} title={INVESTMENT.title} />
 
-      <Reveal delay={0.15} className="grid gap-item md:grid-cols-3 md:gap-item-lg">
-        {INVESTMENT.plans.map((plan) => (
-          <PlanCard key={plan.name} plan={plan} />
+      <div className="grid gap-item md:grid-cols-3 md:gap-item-lg">
+        {INVESTMENT.plans.map((plan, index) => (
+          <Reveal key={plan.name} effect="flip" delay={0.25 + index * 0.15} className="h-full">
+            <PlanCard plan={plan} />
+          </Reveal>
         ))}
-      </Reveal>
+      </div>
 
-      <Reveal delay={0.25}>
+      <Reveal delay={0.8}>
         <p className={cn('text-sm', SLIDE_THEME.light.muted)}>{INVESTMENT.note}</p>
       </Reveal>
     </Slide>

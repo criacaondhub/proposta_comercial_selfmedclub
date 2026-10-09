@@ -1,6 +1,6 @@
 # Design System — SelfMedClub · Proposta Comercial
 
-Apresentação comercial em página única com **scroll lateral**: no desktop/tablet a rolagem vertical do mouse/trackpad move um trilho horizontal de slides em tela cheia. No mobile os slides são empilhados verticalmente com rolagem normal.
+Apresentação comercial em página única com **slides horizontais travados**: no desktop/tablet os slides em tela cheia só avançam pelos botões de navegação (ou setas do teclado) — a rolagem do mouse/trackpad não move os slides. No mobile os slides são empilhados verticalmente com rolagem normal.
 
 Todos os tokens abaixo já estão declarados no `@theme {}` de `src/index.css`. Use sempre as classes utilitárias geradas — nunca valores hexadecimais ou px soltos nos componentes.
 
@@ -68,13 +68,13 @@ bg-surface-section backdrop-blur-glass border border-border-section rounded-glas
 
 ## 2. Tipografia
 
-**Fonte única:** Instrument Sans (Google Fonts), importada no topo de `src/index.css` com `display=swap`.
+| Uso | Fonte | Token / classe | Pesos | Origem |
+|---|---|---|---|---|
+| Títulos (`h1` e `h2` — título de cada slide) | **Armany** | `--font-display` → `font-display` | 400, 500, 600, 700 (sem itálico) | Arquivos `.otf` em `public/fonts/` via `@font-face` |
+| Subtítulo / texto de apoio abaixo do título | **Inter Light** | `--font-heading` → `font-heading font-light` | 300 + itálico 300 | Google Fonts |
+| Texto corrido, cards (`h3`), rótulos | Instrument Sans | `--font-sans` → `font-sans` (já aplicada no `body`) | 400 a 700 + itálico | Google Fonts |
 
-| Propriedade | Valor |
-|---|---|
-| Família | `"Instrument Sans", ui-sans-serif, system-ui, sans-serif` → classe `font-sans` (já aplicada no `body`) |
-| Pesos disponíveis | 400 a 700 (variável) — `font-normal`, `font-medium`, `font-semibold`, `font-bold` |
-| Itálico | Disponível, 400 a 700 — `italic` |
+A Armany é aplicada automaticamente a `h1` e `h2` em `@layer base`. O subtítulo do `SlideHeading` já usa `font-heading font-light`.
 
 ---
 
@@ -101,9 +101,11 @@ bg-surface-section backdrop-blur-glass border border-border-section rounded-glas
 </section>
 ```
 
-### Comportamento do scroll lateral
+### Navegação entre slides
 
-- **Desktop/Tablet (≥ 768px):** wrapper com altura proporcional ao número de slides; um container `sticky top-0 h-svh overflow-hidden` contém o trilho `flex` que é transladado no eixo X conforme o progresso da rolagem vertical (Framer Motion `useScroll` + `useTransform`), suavizado pelo Lenis.
+- **Desktop/Tablet (≥ 768px):** slides empilhados (`absolute inset-0`) num container `h-svh overflow-hidden`; o índice atual muda só por clique nos botões do `SlideProgress` ou pelas setas ←/→ (PageUp/PageDown). Transição em camadas (1,1s, `ease [0.77, 0, 0.175, 1]`): o slide novo desliza por cima do atual com sombra, e o anterior recua ao fundo (escala 0,88, cantos de 28px, véu escuro de 65% e parallax de 28% no sentido do empurrão). Voltando, o atual sai e o anterior volta à frente. A rolagem não move os slides.
+- **Entrada vertical:** componentes passados em `<HorizontalScroll enterFromBottom={[...]}>` sobem (e em `enterFromTop={[...]}` descem) por cima do slide anterior, que fica parado por baixo, em vez de virem da direita. Hoje: `Quote` (slide 04) sobe; `Statement` (slide 05) desce.
+- **Etapas internas:** slides passados em `<HorizontalScroll steps={[{ component, count }]}>` têm etapas — as setas percorrem as etapas antes de trocar de slide (voltando, o slide abre na última). O slide lê a etapa atual com `useSlideSteps()` (`src/lib/slide-steps.ts`). Hoje: `Deliverables` (slide 06), 1 etapa por painel da galeria.
 - **Mobile (< 768px):** sem translação — slides empilhados em coluna, rolagem vertical normal.
 - Touch targets mínimos de 44px em qualquer breakpoint.
 

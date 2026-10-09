@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,wght@0,300;1,300;1,600&display=swap');
 @import "tailwindcss";
 @source "./**/*.{ts,tsx}";
 
@@ -25,12 +25,32 @@
   --color-surface-section: rgba(255, 255, 255, 0.06);
   --color-border-section: rgba(255, 255, 255, 0.12);
 
+  /* Azul da marca clareado — destaques sobre fundos escuros (contraste 6,3 sobre #1a1a1a) */
+  --color-accent-light: #7b98f0;
+
+  /* Slide de citação — fundo grafite */
+  --color-background-dark: #1a1a1a;
+
+  /* Capa — degradê azul premium */
+  --color-cover-from: #162e7e;
+  --color-cover-mid: #0d1f5e;
+  --color-cover-to: #040b2c;
+  --color-cover-glow: #2e4eb0;
+
+  /* Traço metálico (revelação dos logos) */
+  --color-metal-shadow: #8e95ab;
+  --color-metal-mid: #c9cdd8;
+  --color-metal-light: #ffffff;
+  --color-metal-warm: #e9e5d3;
+
   /* Glassmorphism */
   --blur-glass: 16px;
   --radius-glass: 24px;
 
   /* Tipografia */
   --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Armany", "Instrument Sans", ui-serif, serif;
+  --font-heading: "Inter", ui-sans-serif, system-ui, sans-serif;
 
   /* Grid */
   --container-content: 1440px;
@@ -51,10 +71,69 @@
    Estilos fora de @layer têm prioridade sobre @layer independente de especificidade,
    anulando silenciosamente classes como py-, px-, mx-auto, gap-, etc. */
 
+/* Armany — fonte dos títulos (arquivos em public/fonts) */
+@font-face {
+  font-family: "Armany";
+  src: url("/fonts/Armany-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Armany";
+  src: url("/fonts/Armany-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Armany";
+  src: url("/fonts/Armany-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Armany";
+  src: url("/fonts/Armany-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
+  h1,
+  h2 {
+    font-family: var(--font-display);
+  }
+
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Degradê da capa: brilho central sobre azul que escurece até as bordas */
+@utility bg-cover-gradient {
+  background-color: var(--color-cover-to);
+  background-image:
+    radial-gradient(ellipse 55% 50% at 50% 46%, color-mix(in srgb, var(--color-cover-glow) 45%, transparent) 0%, transparent 70%),
+    radial-gradient(ellipse 130% 100% at 50% 35%, var(--color-cover-from) 0%, var(--color-cover-mid) 50%, var(--color-cover-to) 100%);
+}
+
+/* Ruído de fundo leve — textura premium e evita banding no degradê */
+@utility bg-grain {
+  /* Grãos brancos com alfa contrastado — visíveis sobre o azul escuro */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 2.2 0 0 0 -0.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.09;
+}
+
+/* Mesmo ruído para slides claros — grãos escuros sobre o creme */
+@utility bg-grain-dark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.2 0 0 0 -0.75'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.09;
 }
 
 body {
