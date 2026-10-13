@@ -183,3 +183,57 @@ export const NEXT_STEPS = {
   steps: ['Aprovação da proposta', 'Assinatura do contrato', 'Reunião de kickoff'],
   cta: 'Falar no WhatsApp',
 } as const
+
+export const MILESTONES = {
+  title: 'Daqui para o final do ano, teremos 3 grandes entregas.',
+  subtitle: 'Sua jornada como Founder Member começa ainda em 2026.',
+  events: [
+    {
+      label: 'BOAS-VINDAS',
+      date: '29 OUT',
+      description: 'Encontro online de boas-vindas com todos os membros.',
+      tagline: 'ONLINE',
+    },
+    {
+      label: 'EXPERIÊNCIA PRESENCIAL',
+      date: '14 NOV',
+      description: 'Primeiro encontro presencial com todos os membros.',
+      tagline: 'PRESENCIAL',
+    },
+    {
+      label: 'ENCONTRO ONLINE',
+      date: '10 DEZ',
+      description: 'Primeira mentoria online com o Dr. Gustavo Sá.',
+      tagline: 'ONLINE',
+    },
+  ],
+} as const
+
+export const PRESENCIAL = {
+  tagline: 'PRESENCIAL',
+  title: '2 eventos intimistas com o Gustavo Sá e outros membros.',
+  note: '*Eventos e datas a serem definidos em conjunto com a turma.',
+  // ⚠️ IMAGEM PROVISÓRIA — trocar pela imagem final do slide 13
+  image: { src: '/assets/05-entregaveis/Backgroud-Slide-05.webp', alt: '' },
+} as const
+
+export const FEATURES = {
+  items: [
+    {
+      title: 'Experiências Presenciais',
+      description: '2 eventos presenciais exclusivos com o Gustavo Sá e seus convidados. Networking e experiências de alto nível.',
+    },
+    {
+      title: 'Mentorias Online e Exclusivas',
+      description: '12 encontros online com o Dr. Gustavo Sá.',
+    },
+    {
+      title: '6 Encontros Ao Vivo com Convidados',
+      description: 'Sessões de aprofundamento e assuntos que toda clínica precisa saber.',
+    },
+    {
+      title: 'Formação Online Completa',
+      description: 'Uma plataforma educacional com aulas exclusivas para acelerar sua carreira.',
+    },
+  ],
+} as const

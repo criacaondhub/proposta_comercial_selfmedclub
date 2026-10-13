@@ -12,31 +12,42 @@ type SlideProgressProps = {
 
 const formatIndex = (value: number) => String(value).padStart(2, '0')
 
-const buttonClasses =
-  'flex size-11 cursor-pointer items-center justify-center rounded-full text-text transition-colors duration-200 hover:bg-surface hover:text-accent disabled:cursor-default disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-text focus-visible:outline-2 focus-visible:outline-accent'
-
 export function SlideProgress({ current, total, progress, onPrevious, onNext }: SlideProgressProps) {
   return (
     <nav
       aria-label={NAVIGATION.progress}
-      className="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-item rounded-full border border-border bg-background px-2 py-1"
+      className="fixed bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-black/25 px-1 py-1 backdrop-blur-md"
     >
-      <button type="button" onClick={onPrevious} disabled={current === 0} aria-label={NAVIGATION.previous} className={buttonClasses}>
-        <TbChevronLeft className="size-5" aria-hidden />
+      <button
+        type="button"
+        onClick={onPrevious}
+        disabled={current === 0}
+        aria-label={NAVIGATION.previous}
+        className="flex size-7 cursor-pointer items-center justify-center rounded-full text-white/50 transition-colors duration-200 hover:text-white/90 disabled:cursor-default disabled:opacity-20 focus-visible:outline-2 focus-visible:outline-white/40"
+      >
+        <TbChevronLeft className="size-3.5" aria-hidden />
       </button>
 
-      <div className="flex items-center gap-item">
-        <span className="text-sm font-medium tabular-nums text-text" aria-live="polite">
+      <div className="flex items-center gap-2.5 px-2" aria-live="polite">
+        <span className="text-[11px] font-medium tabular-nums text-white/60">
           {formatIndex(current + 1)}
-          <span className="text-text-muted"> / {formatIndex(total)}</span>
         </span>
-        <div className="h-0.5 w-24 overflow-hidden rounded-full bg-border" aria-hidden>
-          <motion.div style={{ scaleX: progress }} className="h-full origin-left bg-accent" />
+        <div className="h-px w-20 overflow-hidden rounded-full bg-white/15" aria-hidden>
+          <motion.div style={{ scaleX: progress }} className="h-full origin-left bg-white/70" />
         </div>
+        <span className="text-[11px] tabular-nums text-white/30">
+          {formatIndex(total)}
+        </span>
       </div>
 
-      <button type="button" onClick={onNext} disabled={current === total - 1} aria-label={NAVIGATION.next} className={buttonClasses}>
-        <TbChevronRight className="size-5" aria-hidden />
+      <button
+        type="button"
+        onClick={onNext}
+        disabled={current === total - 1}
+        aria-label={NAVIGATION.next}
+        className="flex size-7 cursor-pointer items-center justify-center rounded-full text-white/50 transition-colors duration-200 hover:text-white/90 disabled:cursor-default disabled:opacity-20 focus-visible:outline-2 focus-visible:outline-white/40"
+      >
+        <TbChevronRight className="size-3.5" aria-hidden />
       </button>
     </nav>
   )
