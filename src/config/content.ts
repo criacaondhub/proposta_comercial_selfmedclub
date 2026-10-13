@@ -1,4 +1,4 @@
-export const CONFIG = {
+﻿export const CONFIG = {
   // ⚠️ PENDENTE — preencher antes do deploy
   FORM_ENDPOINT: '⚠️ PENDENTE',
   WHATSAPP_URL: '⚠️ PENDENTE',
@@ -45,7 +45,7 @@ export const ABOUT = {
 export const QUOTE = {
   // Trecho entre *asteriscos* fica na Armany (fonte do h1), em itálico e negrito
   text: 'A liberdade e os resultados que tenho não vieram apenas dos meus estudos. *Vieram do dia que decidi parar de ser o centro da minha clínica* e comecei a construir um negócio de verdade.',
-  author: 'Dr. Gustavo Sá',
+  author: 'Dr. Gustavo Sá',
 } as const
 
 export const STATEMENT = {
@@ -64,7 +64,7 @@ export const CHALLENGE = {
   items: [
     { icon: 'pen', text: 'Mercado de canetas emagrecedoras deve chegar a *R$20 bi* no Brasil com genéricos' },
     { icon: 'growth', text: 'Mercado de obesidade e diabetes movimentará *R$572 bilhões* até 2030' },
-    { icon: 'health', text: 'Setor de saúde e bem-estar consolida resiliência e *faturamento bilionário*' },
+    { icon: 'health', text: 'Setor de saúde e bem-estar consolida\nresiliência e *faturamento bilionário*' },
   ],
 } as const
 
@@ -99,10 +99,10 @@ export const ONLINE_TRAINING = {
   title: 'Toda minha experiência concentrada em um único lugar, em conteúdos gravados e Ao Vivo',
   // Ícones: host | guests | platform | app
   items: [
-    { icon: 'host', text: 'Uma mentoria por mês com o Dr. Gustavo Sá sobre temas diversos' },
+    { icon: 'host', text: 'Duas mentorias por mês com o\nDr. Gustavo Sá sobre temas diversos' },
     {
       icon: 'guests',
-      text: 'Uma mentoria por mês com convidados especiais sobre Marketing, Vendas, Gestão, Protocolos e muito mais.',
+      text: 'Marketing, vendas, Gestão e muito mais.',
     },
     {
       icon: 'platform',
@@ -153,7 +153,7 @@ export const CURRICULUM: {
       items: [
         { text: 'Como precificar seus atendimentos;' },
         { text: 'Como aumentar seu ticket médio;' },
-        { text: 'Como lotar sua agenda e ter um bom posicionamento no digital;' },
+        { text: 'Como lotar sua agenda e ter um bom\nposicionamento no digital;' },
         { text: 'Construindo um atendimento premium;' },
         { text: 'Gestão financeira da clínica;' },
         { text: 'Construindo autoridade e reputação;' },
@@ -203,7 +203,7 @@ export const MILESTONES = {
     {
       label: 'ENCONTRO ONLINE',
       date: '10 DEZ',
-      description: 'Primeira mentoria online com o Dr. Gustavo Sá.',
+      description: 'Primeira mentoria online com o Dr. Gustavo Sá.',
       tagline: 'ONLINE',
     },
   ],
@@ -211,8 +211,8 @@ export const MILESTONES = {
 
 export const PRESENCIAL = {
   tagline: 'PRESENCIAL',
-  title: '2 eventos intimistas com o Gustavo Sá e outros membros.',
-  note: '*Eventos e datas a serem definidos em conjunto com a turma.',
+  title: '4 Experiências intimistas com Gustavo Sá e outros membros.',
+  note: 'Datas das experiências presenciais a serem definidas com a turma.',
   // ⚠️ IMAGEM PROVISÓRIA — trocar pela imagem final do slide 13
   image: { src: '/assets/05-entregaveis/Backgroud-Slide-05.webp', alt: '' },
 } as const
@@ -221,11 +221,11 @@ export const FEATURES = {
   items: [
     {
       title: 'Experiências Presenciais',
-      description: '2 eventos presenciais exclusivos com o Gustavo Sá e seus convidados. Networking e experiências de alto nível.',
+      description: '4 eventos presenciais exclusivos com o Gustavo Sá\ne seus convidados. Networking e experiências de alto nível.',
     },
     {
       title: 'Mentorias Online e Exclusivas',
-      description: '12 encontros online com o Dr. Gustavo Sá.',
+      description: '24 encontros online.',
     },
     {
       title: '6 Encontros Ao Vivo com Convidados',

@@ -21,7 +21,7 @@ export function Milestones() {
             <Reveal effect="rise">
               <h1
                 className={cn(
-                  'max-w-3xl text-3xl font-semibold leading-[1.1] tracking-tight text-balance md:text-4xl xl:text-5xl',
+                  'max-w-3xl font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
                   theme.heading,
                 )}
               >
@@ -68,7 +68,7 @@ export function Milestones() {
                   </div>
 
                   {/* Descrição */}
-                  <p className={cn('text-sm leading-relaxed md:text-base', theme.text)}>
+                  <p className={cn('text-lg leading-relaxed md:text-xl', theme.text)}>
                     {event.description}
                   </p>
                 </GlassCard>
@@ -81,7 +81,7 @@ export function Milestones() {
             <img
               src="/assets/01-capa/Logo-vertical-branco.svg"
               alt="SelfMed Club"
-              className="h-10 w-auto opacity-70 md:h-12"
+              className="h-16 w-auto opacity-90 md:h-20"
             />
           </Reveal>
         </div>

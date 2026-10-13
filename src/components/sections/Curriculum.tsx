@@ -37,7 +37,7 @@ export function Curriculum() {
             </p>
             <h2
               className={cn(
-                'text-3xl font-semibold leading-[1.1] tracking-tight text-balance md:text-4xl xl:text-5xl',
+                'font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
                 theme.heading,
               )}
             >
@@ -54,7 +54,7 @@ export function Curriculum() {
                       <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <p className={cn('text-sm font-medium leading-snug md:text-base', theme.text)}>{item.text}</p>
+                      <p className={cn('text-base font-medium leading-snug md:text-lg', theme.text)}>{item.text}</p>
                     </div>
                     {item.sub && (
                       <div className="flex flex-wrap gap-x-4 gap-y-1 pl-7">

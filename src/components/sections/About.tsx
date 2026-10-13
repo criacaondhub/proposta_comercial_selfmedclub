@@ -41,7 +41,7 @@ export function About() {
 
         <h2
           className={cn(
-            'max-w-5xl text-4xl font-semibold leading-[1.1] tracking-tight text-balance md:text-6xl xl:text-7xl',
+            'max-w-5xl font-display text-4xl font-semibold text-balance md:text-6xl xl:text-7xl',
             theme.heading,
           )}
         >

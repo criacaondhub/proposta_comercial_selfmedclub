@@ -22,7 +22,7 @@ export function Offer() {
             <div className="flex items-baseline gap-3">
               <span className="text-sm font-semibold uppercase tracking-widest text-white/40">DE</span>
               <span className="font-display text-4xl font-semibold tabular-nums text-white/30 line-through decoration-white/40 decoration-2 md:text-5xl xl:text-6xl">
-                R$ 125.000,00
+                R$ 150.000,00
               </span>
             </div>
           </Reveal>
@@ -43,7 +43,7 @@ export function Offer() {
           <div className="rounded-full border border-white/10 bg-white/5 px-6 py-2.5 backdrop-blur-sm">
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/60">
               Desconto de{' '}
-              <span className="font-semibold text-white">R$ 30.000,00</span>
+              <span className="font-semibold text-white">R$ 55.000,00</span>
             </p>
           </div>
         </Reveal>

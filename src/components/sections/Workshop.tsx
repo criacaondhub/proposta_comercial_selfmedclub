@@ -7,8 +7,8 @@ const theme = SLIDE_THEME.light
 
 const bullets = [
   'Acesso a uma biblioteca de roteiros de anúncios já validados para você replicar e conseguir ter clientes querendo fechar com você;',
-  'Os nossos especialistas em marketing avaliarão os seus anúncios gravados para você sair do Workshop com eles prontos;',
-  'Na prática, meu estrategista de marketing pessoal abrirá 2 horas da agenda dele para uma imersão completa com vocês.',
+  'Os nossos especialistas em marketing avaliarão os seus anúncios gravados para você\nsair do Workshop com eles prontos;',
+  'Na prática, meu estrategista de marketing pessoal abrirá 2 horas da agenda\ndele para uma imersão completa com vocês.',
 ]
 
 export function Workshop() {
@@ -43,7 +43,7 @@ export function Workshop() {
             <h1 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
               Oficina de <span className={theme.accent}>marketing</span>, tráfego e <span className={theme.accent}>criativos</span>
             </h1>
-            <h2 className={cn('max-w-md font-heading text-base font-light leading-relaxed text-balance md:text-lg', theme.text)}>
+            <h2 className={cn('font-heading text-base font-light leading-relaxed text-balance md:text-lg', theme.text)}>
               Estratégias validadas para ter resultados no marketing sem precisar de seguidores, autoridade ou equipe.
             </h2>
           </Reveal>
@@ -57,7 +57,11 @@ export function Workshop() {
                       <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <p className={cn('text-sm leading-snug md:text-base', theme.text)}>{bullet}</p>
+                      <p className={cn('text-lg leading-snug md:text-xl', theme.text)}>
+                        {bullet.split('\n').map((line, i, arr) => (
+                          <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                        ))}
+                      </p>
                     </div>
                   </GlassCard>
                 </li>

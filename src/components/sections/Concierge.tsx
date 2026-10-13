@@ -31,8 +31,10 @@ export function Concierge() {
             <h1 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
               Concierge <span className={theme.accent}>Pessoal</span>
             </h1>
-            <h2 className={cn('max-w-md font-heading text-base font-light leading-relaxed text-balance md:text-lg', theme.text)}>
-              Você terá um Concierge dedicado a acompanhar seus resultados e te ajudar com qualquer tipo de dificuldade e dúvidas como:
+            <h2 className={cn('font-heading text-base font-light leading-relaxed md:text-lg', theme.text)}>
+              Você terá um Concierge dedicado a acompanhar seus resultados
+              <br />
+              e te ajudar com qualquer tipo de dificuldade e dúvidas como:
             </h2>
           </Reveal>
 
@@ -45,7 +47,7 @@ export function Concierge() {
                       <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <p className={cn('text-sm leading-snug md:text-base', theme.text)}>{bullet}</p>
+                      <p className={cn('text-lg leading-snug md:text-xl', theme.text)}>{bullet}</p>
                     </div>
                   </GlassCard>
                 </li>

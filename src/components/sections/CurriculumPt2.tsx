@@ -59,7 +59,7 @@ export function CurriculumPt2() {
             </p>
             <h2
               className={cn(
-                'text-3xl font-semibold leading-[1.1] tracking-tight text-balance md:text-4xl xl:text-5xl',
+                'font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
                 theme.heading,
               )}
             >
@@ -80,7 +80,11 @@ export function CurriculumPt2() {
                           {String(index + 1).padStart(2, '0')}
                         </span>
                       </div>
-                      <p className={cn('text-sm leading-snug', theme.text)}>{item.text}</p>
+                      <p className={cn('text-base leading-snug md:text-lg', theme.text)}>
+                        {item.text.split('\n').map((line, i, arr) => (
+                          <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                        ))}
+                      </p>
                     </GlassCard>
                   </motion.li>
                 )

@@ -19,6 +19,8 @@ import { Doubts } from '@/components/sections/Doubts'
 import { Bonus } from '@/components/sections/Bonus'
 import { Concierge } from '@/components/sections/Concierge'
 import { Workshop } from '@/components/sections/Workshop'
+import { Fellow } from '@/components/sections/Fellow'
+import { MentoriaIndividual } from '@/components/sections/MentoriaIndividual'
 import { Recap } from '@/components/sections/Recap'
 import { Pricing } from '@/components/sections/Pricing'
 import { Offer } from '@/components/sections/Offer'
@@ -61,6 +63,8 @@ function App() {
           <FullImage id="slide-18" src="/assets/geral/capa-slide-18.webp" />
           <Concierge />
           <Workshop />
+          <Fellow />
+          <MentoriaIndividual />
           <Recap />
           <Pricing />
           <Offer />

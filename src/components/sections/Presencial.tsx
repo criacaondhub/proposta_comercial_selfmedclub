@@ -26,18 +26,19 @@ export function Presencial() {
             {/* H1 */}
             <h1
               className={cn(
-                'max-w-xl text-3xl font-semibold leading-[1.1] tracking-tight text-balance md:text-4xl xl:text-5xl',
+                'font-display text-4xl font-semibold text-balance md:text-5xl',
                 theme.heading,
               )}
             >
-              <span className={theme.accent}>2 eventos intimistas</span>
-              {' com o Gustavo Sá e outros membros.'}
+              <span className={theme.accent}>4 Experiências intimistas</span>
+              <br />
+              {'com Gustavo Sá e outros membros.'}
             </h1>
           </Reveal>
 
           {/* Nota */}
           <Reveal effect="rise" delay={0.4}>
-            <p className={cn('text-sm leading-relaxed md:text-base', theme.muted)}>
+            <p className={cn('text-lg leading-relaxed md:text-xl', theme.muted)}>
               {PRESENCIAL.note}
             </p>
           </Reveal>

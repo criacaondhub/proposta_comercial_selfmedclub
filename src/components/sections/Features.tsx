@@ -44,8 +44,10 @@ export function Features() {
                   <h3 className={cn('text-xl font-semibold leading-snug md:text-2xl', theme.heading)}>
                     {item.title}
                   </h3>
-                  <p className={cn('text-sm leading-relaxed md:text-base', theme.text)}>
-                    {item.description}
+                  <p className={cn('text-lg leading-relaxed md:text-xl', theme.text)}>
+                    {item.description.split('\n').map((line, i, arr) => (
+                      <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                    ))}
                   </p>
                 </div>
               </GlassCard>

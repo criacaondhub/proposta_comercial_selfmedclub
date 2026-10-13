@@ -129,7 +129,7 @@ function SlideDeck({ children, enterFromBottom = [], enterFromTop = [], steps = 
           return (
             <motion.div
               key={index}
-              className="absolute inset-0 overflow-hidden shadow-2xl will-change-transform"
+              className="absolute inset-0 overflow-hidden will-change-transform"
               style={{ zIndex: index }}
               initial={false}
               animate={pose}

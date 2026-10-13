@@ -42,11 +42,13 @@ export function OnlineTraining() {
             </p>
             <h2
               className={cn(
-                'text-3xl font-semibold leading-[1.1] tracking-tight text-balance md:text-4xl xl:text-5xl',
+                'font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
                 theme.heading,
               )}
             >
-              {ONLINE_TRAINING.title}
+              Toda minha{' '}
+              <span className={theme.accent}>experiência concentrada</span>
+              {' '}em um único lugar, em conteúdos gravados e Ao Vivo
             </h2>
           </Reveal>
 
@@ -64,7 +66,11 @@ export function OnlineTraining() {
                       >
                         <Icon className="size-5" />
                       </span>
-                      <p className={cn('text-sm leading-relaxed md:text-base', theme.text)}>{item.text}</p>
+                      <p className={cn('text-lg leading-relaxed md:text-xl', theme.text)}>
+                        {item.text.split('\n').map((line, i, arr) => (
+                          <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+                        ))}
+                      </p>
                     </GlassCard>
                   </Reveal>
                 </li>

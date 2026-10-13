@@ -14,17 +14,20 @@ const ICONS = {
   health: TbHeartbeat,
 } as const
 
-// Trechos entre *asteriscos* (valores) ficam em destaque
+// Trechos entre *asteriscos* ficam em destaque; \n vira <br />
 function renderHighlight(text: string) {
-  return text.split(/(\*[^*]+\*)/).map((part, index) =>
-    part.startsWith('*') && part.endsWith('*') ? (
-      <strong key={index} className={cn('font-semibold', theme.accent)}>
-        {part.slice(1, -1)}
-      </strong>
-    ) : (
-      part
-    ),
-  )
+  return text.split('\n').flatMap((line, li, lines) => {
+    const parts = line.split(/(\*[^*]+\*)/).map((part, i) =>
+      part.startsWith('*') && part.endsWith('*') ? (
+        <strong key={`${li}-${i}`} className={cn('font-semibold', theme.accent)}>
+          {part.slice(1, -1)}
+        </strong>
+      ) : (
+        part
+      ),
+    )
+    return li < lines.length - 1 ? [...parts, <br key={`br-${li}`} />] : parts
+  })
 }
 
 export function Challenge() {
@@ -40,7 +43,7 @@ export function Challenge() {
       <Reveal effect="left" className="flex flex-col gap-item md:gap-item-lg">
         <h2
           className={cn(
-            'max-w-xl text-4xl font-semibold leading-[1.1] tracking-tight text-balance md:text-5xl xl:text-6xl',
+            'max-w-xl font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
             theme.heading,
           )}
         >
