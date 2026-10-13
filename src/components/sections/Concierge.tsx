@@ -1,4 +1,9 @@
+import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
+import { cn } from '@/lib/utils'
+import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
+
+const theme = SLIDE_THEME.light
 
 const bullets = [
   'Gestão das datas de Encontros Presenciais;',
@@ -9,49 +14,56 @@ const bullets = [
 
 export function Concierge() {
   return (
-    <section
-      id="concierge"
-      className="relative h-svh w-full shrink-0 overflow-hidden bg-background-dark md:w-screen"
-    >
-      <div className="flex h-full flex-col justify-center gap-group px-slide-x py-slide-y md:grid md:grid-cols-2 md:items-center md:gap-group-lg md:px-slide-x-lg md:py-slide-y-lg">
+    <SlideVariantContext.Provider value="light">
+      <section
+        id="concierge"
+        className="relative isolate w-full shrink-0 overflow-hidden bg-background text-text md:grid md:h-svh md:grid-cols-[1.15fr_1fr]"
+      >
+        <div className="absolute inset-0 -z-10 bg-grain-dark" aria-hidden />
 
-        {/* Esquerda — tagline + H1 + H2 */}
-        <div className="flex flex-col gap-item md:gap-item-lg">
-          <Reveal effect="drop">
-            <p className="flex items-center gap-item text-sm font-medium uppercase tracking-[0.2em] text-white/40">
-              <span className="h-px w-8 bg-white/20 md:w-12" aria-hidden />
+        {/* Coluna esquerda — conteúdo */}
+        <div className="flex flex-col justify-center gap-group px-slide-x py-slide-y md:gap-group-lg md:px-slide-x-lg md:py-slide-y-lg">
+          <Reveal effect="drop" className="flex flex-col gap-item md:gap-item-lg">
+            <p className={cn('flex items-center gap-item text-sm font-medium uppercase tracking-[0.2em]', theme.accent)}>
+              <span className="h-px w-8 bg-accent md:w-12" aria-hidden />
               Bônus
             </p>
-          </Reveal>
-
-          <Reveal effect="rise" delay={0.15}>
-            <h1 className="font-display text-4xl font-semibold text-accent-light text-balance md:text-5xl xl:text-6xl">
-              Concierge Pessoal
+            <h1 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
+              Concierge <span className={theme.accent}>Pessoal</span>
             </h1>
-          </Reveal>
-
-          <Reveal effect="rise" delay={0.3}>
-            <h2 className="max-w-md font-heading text-base font-light leading-relaxed text-white/70 text-balance md:text-lg">
+            <h2 className={cn('max-w-md font-heading text-base font-light leading-relaxed text-balance md:text-lg', theme.text)}>
               Você terá um Concierge dedicado a acompanhar seus resultados e te ajudar com qualquer tipo de dificuldade e dúvidas como:
             </h2>
           </Reveal>
+
+          <ul className="flex flex-col gap-3">
+            {bullets.map((bullet, index) => (
+              <Reveal key={bullet} effect="rise" delay={0.35 + index * 0.1}>
+                <li>
+                  <GlassCard className="gap-2 p-4 md:p-5">
+                    <div className="flex items-baseline gap-3">
+                      <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <p className={cn('text-sm leading-snug md:text-base', theme.text)}>{bullet}</p>
+                    </div>
+                  </GlassCard>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
         </div>
 
-        {/* Direita — bullets */}
-        <ul className="flex flex-col gap-4 md:gap-5">
-          {bullets.map((bullet, index) => (
-            <Reveal key={bullet} effect="left" delay={0.35 + index * 0.12}>
-              <li className="flex items-start gap-4 border-b border-white/10 pb-4 md:pb-5">
-                <span className="mt-[0.35em] size-1.5 shrink-0 rounded-full bg-accent-light" aria-hidden />
-                <p className="font-heading text-sm font-light leading-relaxed text-white/80 md:text-base">
-                  {bullet}
-                </p>
-              </li>
-            </Reveal>
-          ))}
-        </ul>
-
-      </div>
-    </section>
+        {/* Coluna direita — imagem full-bleed */}
+        <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
+          <img
+            src="/assets/geral/imagem-slide-19.webp"
+            alt=""
+            decoding="async"
+            className="block h-full w-full object-cover"
+          />
+        </Reveal>
+      </section>
+    </SlideVariantContext.Provider>
   )
 }

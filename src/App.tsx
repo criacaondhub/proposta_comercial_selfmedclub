@@ -18,6 +18,11 @@ import { Features } from '@/components/sections/Features'
 import { Doubts } from '@/components/sections/Doubts'
 import { Bonus } from '@/components/sections/Bonus'
 import { Concierge } from '@/components/sections/Concierge'
+import { Workshop } from '@/components/sections/Workshop'
+import { Recap } from '@/components/sections/Recap'
+import { Pricing } from '@/components/sections/Pricing'
+import { Offer } from '@/components/sections/Offer'
+import { Decision } from '@/components/sections/Decision'
 
 function App() {
   return (
@@ -54,6 +59,11 @@ function App() {
           <Bonus />
           <FullImage id="slide-18" src="/assets/geral/capa-slide-18.webp" />
           <Concierge />
+          <Workshop />
+          <Recap />
+          <Pricing />
+          <Offer />
+          <Decision />
         </HorizontalScroll>
       </main>
     </MotionConfig>
