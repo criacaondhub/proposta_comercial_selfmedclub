@@ -18,7 +18,7 @@ export function Recap() {
           <img
             src="/assets/01-capa/Logo-vertical-branco.svg"
             alt="SelfMed Club"
-            className="h-10 w-auto opacity-70 md:h-12"
+            className="h-16 w-auto opacity-90 md:h-20"
           />
         </Reveal>
 

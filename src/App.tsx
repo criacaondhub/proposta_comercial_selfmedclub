@@ -23,6 +23,7 @@ import { Recap } from '@/components/sections/Recap'
 import { Pricing } from '@/components/sections/Pricing'
 import { Offer } from '@/components/sections/Offer'
 import { Decision } from '@/components/sections/Decision'
+import { CallOffer } from '@/components/sections/CallOffer'
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
           <Pricing />
           <Offer />
           <Decision />
+          <CallOffer />
         </HorizontalScroll>
       </main>
     </MotionConfig>
