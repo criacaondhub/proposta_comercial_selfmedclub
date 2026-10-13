@@ -74,12 +74,7 @@ export function CurriculumPt2() {
                 return (
                   <motion.li key={item.text} {...ITEM_ANIMATION}>
                     <GlassCard className="h-full gap-2 p-3 md:p-4">
-                      <div className="flex items-center gap-2">
-                        <Icon className={cn('size-4 shrink-0', theme.accent)} aria-hidden />
-                        <span className={cn('text-xs font-medium tabular-nums', theme.muted)}>
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
-                      </div>
+                      <Icon className={cn('size-6 shrink-0', theme.accent)} aria-hidden />
                       <p className={cn('text-base leading-snug md:text-lg', theme.text)}>
                         {item.text.split('\n').map((line, i, arr) => (
                           <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
