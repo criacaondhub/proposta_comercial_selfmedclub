@@ -24,7 +24,7 @@ export function MentoriaIndividual() {
         {/* Coluna esquerda — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
           <img
-            src="/assets/geral/imagem-slide-22.webp"
+            src="/assets/geral/Slide_22.webp"
             alt=""
             decoding="async"
             className="block h-full w-full object-cover"

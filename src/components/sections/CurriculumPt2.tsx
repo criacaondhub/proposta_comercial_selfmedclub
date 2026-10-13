@@ -95,19 +95,12 @@ export function CurriculumPt2() {
 
         {/* Coluna direita — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
-          <motion.div
-            className="h-full w-full"
-            animate={{ scale: visibleCount >= 7 ? 1.12 : 1 }}
-            transition={{ duration: 1.2, ease: [0.25, 0, 0, 1] }}
-          >
-            {/* ⚠️ IMAGEM PROVISÓRIA — trocar pela imagem final do slide 09 */}
-            <img
-              src="/assets/05-entregaveis/Backgroud-Slide-05.webp"
-              alt=""
-              decoding="async"
-              className="block h-full w-full object-cover"
-            />
-          </motion.div>
+          <img
+            src="/assets/05-entregaveis/Backgroud-Slide-05.webp"
+            alt=""
+            decoding="async"
+            className="block h-full w-full object-cover"
+          />
         </Reveal>
       </section>
     </SlideVariantContext.Provider>
