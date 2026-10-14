@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
 import { GlassCard } from '@/components/ui/GlassCard'
@@ -59,7 +60,7 @@ export function Fellow() {
         {/* Coluna direita — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
           <img
-            src="/assets/geral/Slide-21.webp"
+            src={asset('/assets/geral/Slide-21.webp')}
             alt=""
             decoding="async"
             className="block h-full w-full object-cover"

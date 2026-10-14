@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import {
   TbAward,
   TbCalendarPlus,
@@ -92,7 +93,7 @@ export function CurriculumPt2() {
         {/* Coluna direita — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
           <img
-            src="/assets/geral/Slide-09.webp"
+            src={asset('/assets/geral/Slide-09.webp')}
             alt=""
             decoding="async"
             className="block h-full w-full object-cover object-[25%_center]"

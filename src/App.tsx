@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import { MotionConfig } from 'framer-motion'
 import { HorizontalScroll } from '@/components/ui/HorizontalScroll'
 import { CURRICULUM, DELIVERABLES } from '@/config/content'
@@ -54,13 +55,13 @@ function App() {
           <CurriculumPt2 />
           <NextSteps />
           <Milestones />
-          <FullImage id="slide-12" src="/assets/geral/Capa-slide12.webp" />
+          <FullImage id="slide-12" src={asset('/assets/geral/Capa-slide12.webp')} />
           <Presencial />
-          <FullImage id="slide-14" src="/assets/geral/Capa-slide14.webp" />
+          <FullImage id="slide-14" src={asset('/assets/geral/Capa-slide14.webp')} />
           <Features />
           <Doubts />
           <Bonus />
-          <FullImage id="slide-18" src="/assets/geral/capa-slide-18.webp" />
+          <FullImage id="slide-18" src={asset('/assets/geral/capa-slide-18.webp')} />
           <Concierge />
           <Workshop />
           <Fellow />

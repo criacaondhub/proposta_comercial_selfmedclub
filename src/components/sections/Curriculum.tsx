@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CURRICULUM } from '@/config/content'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
@@ -77,7 +78,7 @@ export function Curriculum() {
         {/* Coluna direita — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
           <img
-            src="/assets/geral/Slide-08.webp"
+            src={asset('/assets/geral/Slide-08.webp')}
             alt=""
             decoding="async"
             className="block h-full w-full object-cover object-[60%_center]"

@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 export function NextSteps() {
   return (
     <section
@@ -5,7 +6,7 @@ export function NextSteps() {
       className="relative h-svh w-full shrink-0 overflow-hidden md:w-screen"
     >
       <img
-        src="/assets/geral/capa-slide-10.webp"
+        src={asset('/assets/geral/capa-slide-10.webp')}
         alt=""
         decoding="async"
         className="absolute inset-0 h-full w-full object-cover"

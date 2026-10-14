@@ -74,7 +74,7 @@ bg-surface-section backdrop-blur-glass border border-border-section rounded-glas
 | Subtítulo / texto de apoio abaixo do título | **Inter Light** | `--font-heading` → `font-heading font-light` | 300 + itálico 300 | Google Fonts |
 | Texto corrido, cards (`h3`), rótulos | Instrument Sans | `--font-sans` → `font-sans` (já aplicada no `body`) | 400 a 700 + itálico | Google Fonts |
 
-A Armany é aplicada automaticamente a `h1` e `h2` em `@layer base`. O subtítulo do `SlideHeading` já usa `font-heading font-light`.
+A Armany é aplicada automaticamente a `h1` e `h2` em `@layer base`.
 
 ---
 

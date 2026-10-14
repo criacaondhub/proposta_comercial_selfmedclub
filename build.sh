@@ -1,0 +1,1 @@
+git pull origin main && docker build -t selfmedclub-proposta:latest . && docker stack deploy -c docker-compose.yml selfmedclub-proposta && docker service update --image selfmedclub-proposta:latest --force selfmedclub-proposta_selfmedclub-proposta

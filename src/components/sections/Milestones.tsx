@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import { MILESTONES } from '@/config/content'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
@@ -79,7 +80,7 @@ export function Milestones() {
           {/* Logo centralizado abaixo */}
           <Reveal effect="rise" delay={0.7}>
             <img
-              src="/assets/01-capa/Logo-vertical-branco.svg"
+              src={asset('/assets/01-capa/Logo-vertical-branco.svg')}
               alt="SelfMed Club"
               className="h-16 w-auto opacity-90 md:h-20"
             />

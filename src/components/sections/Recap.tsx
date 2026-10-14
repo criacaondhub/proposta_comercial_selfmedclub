@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
 import { Reveal } from '@/components/ui/Reveal'
@@ -16,7 +17,7 @@ export function Recap() {
         {/* Logo topo */}
         <Reveal effect="rise">
           <img
-            src="/assets/01-capa/Logo-vertical-branco.svg"
+            src={asset('/assets/01-capa/Logo-vertical-branco.svg')}
             alt="SelfMed Club"
             className="h-16 w-auto opacity-90 md:h-20"
           />

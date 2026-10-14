@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
 export default defineConfig({
+  // Publicado em https://dr.gustavosa.com.br/selfmedclub/proposta/
+  base: '/selfmedclub/proposta/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
