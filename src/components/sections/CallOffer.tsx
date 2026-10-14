@@ -24,9 +24,9 @@ export function CallOffer() {
           {/* Bloco principal */}
           <div className="flex flex-col items-center gap-5 md:gap-6">
             <Reveal effect="rise" delay={0.2}>
-              <h1 className={cn('font-display text-3xl font-semibold md:text-4xl xl:text-5xl', theme.heading)}>
+              <h2 className={cn('font-display text-3xl font-semibold md:text-4xl xl:text-5xl', theme.heading)}>
                 Para fechamento em call:
-              </h1>
+              </h2>
             </Reveal>
 
             <Reveal effect="rise" delay={0.35}>

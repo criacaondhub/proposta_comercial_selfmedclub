@@ -8,11 +8,11 @@ export function Decision() {
     >
       <div className="flex h-full flex-col items-center justify-center px-slide-x text-center md:px-slide-x-lg">
         <Reveal effect="rise">
-          <h1 className="font-display text-5xl font-semibold text-balance text-white md:text-6xl xl:text-7xl">
+          <h2 className="font-display text-5xl font-semibold text-balance text-white md:text-6xl xl:text-7xl">
             Para você tomar essa{' '}
             <span className="text-accent-light">decisão</span>{' '}
             agora
-          </h1>
+          </h2>
         </Reveal>
       </div>
     </section>

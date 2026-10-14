@@ -18,9 +18,9 @@ export function Doubts() {
           </p>
         </Reveal>
         <Reveal effect="zoom" delay={0.2}>
-          <h1 className="font-display text-7xl font-semibold tracking-widest text-white md:text-9xl xl:text-[12rem]">
+          <h2 className="font-display text-7xl font-semibold tracking-widest text-white md:text-9xl xl:text-[12rem]">
             ???
-          </h1>
+          </h2>
         </Reveal>
       </div>
     </section>

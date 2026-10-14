@@ -19,19 +19,19 @@ export function Milestones() {
           {/* Heading */}
           <div className="flex flex-col items-center gap-4 text-center md:gap-5">
             <Reveal effect="rise">
-              <h1
+              <h2
                 className={cn(
                   'max-w-4xl font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
                   theme.heading,
                 )}
               >
                 {MILESTONES.title}
-              </h1>
+              </h2>
             </Reveal>
             <Reveal effect="rise" delay={0.15}>
-              <h2 className={cn('max-w-xl font-heading text-base font-light leading-snug md:text-lg', theme.muted)}>
+              <p className={cn('max-w-xl font-heading text-base font-light leading-snug md:text-lg', theme.muted)}>
                 {MILESTONES.subtitle}
-              </h2>
+              </p>
             </Reveal>
           </div>
 

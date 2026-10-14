@@ -28,20 +28,20 @@ export function Concierge() {
               <span className="h-px w-8 bg-accent md:w-12" aria-hidden />
               Bônus
             </p>
-            <h1 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
+            <h2 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
               Concierge <span className={theme.accent}>Pessoal</span>
-            </h1>
-            <h2 className={cn('font-heading text-base font-light leading-relaxed md:text-lg', theme.text)}>
+            </h2>
+            <p className={cn('font-heading text-base font-light leading-relaxed md:text-lg', theme.text)}>
               Você terá um Concierge dedicado a acompanhar seus resultados
               <br />
               e te ajudar com qualquer tipo de dificuldade e dúvidas como:
-            </h2>
+            </p>
           </Reveal>
 
           <ul className="flex flex-col gap-3">
             {bullets.map((bullet, index) => (
-              <Reveal key={bullet} effect="rise" delay={0.35 + index * 0.1}>
-                <li>
+              <li key={bullet}>
+                <Reveal effect="rise" delay={0.35 + index * 0.1}>
                   <GlassCard className="gap-2 p-4 md:p-5">
                     <div className="flex items-baseline gap-3">
                       <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
@@ -50,8 +50,8 @@ export function Concierge() {
                       <p className={cn('text-lg leading-snug md:text-xl', theme.text)}>{bullet}</p>
                     </div>
                   </GlassCard>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ul>
         </div>

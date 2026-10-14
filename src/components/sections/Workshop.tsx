@@ -40,18 +40,18 @@ export function Workshop() {
             <p className={cn('text-xs font-semibold uppercase tracking-[0.2em]', theme.muted)}>
               Workshop Mão na Massa
             </p>
-            <h1 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
+            <h2 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
               Oficina de <span className={theme.accent}>marketing</span>, tráfego e <span className={theme.accent}>criativos</span>
-            </h1>
-            <h2 className={cn('font-heading text-base font-light leading-relaxed text-balance md:text-lg', theme.text)}>
-              Estratégias validadas para ter resultados no marketing sem precisar de seguidores, autoridade ou equipe.
             </h2>
+            <p className={cn('font-heading text-base font-light leading-relaxed text-balance md:text-lg', theme.text)}>
+              Estratégias validadas para ter resultados no marketing sem precisar de seguidores, autoridade ou equipe.
+            </p>
           </Reveal>
 
           <ul className="flex flex-col gap-3">
             {bullets.map((bullet, index) => (
-              <Reveal key={index} effect="rise" delay={0.35 + index * 0.1}>
-                <li>
+              <li key={index}>
+                <Reveal effect="rise" delay={0.35 + index * 0.1}>
                   <GlassCard className="gap-2 p-4 md:p-5">
                     <div className="flex items-baseline gap-3">
                       <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
@@ -64,8 +64,8 @@ export function Workshop() {
                       </p>
                     </div>
                   </GlassCard>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ul>
         </div>

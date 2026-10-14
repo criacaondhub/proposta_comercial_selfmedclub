@@ -29,14 +29,14 @@ export function Pricing() {
           {/* Heading */}
           <div className="flex flex-col items-center gap-1 text-center">
             <Reveal effect="drop">
-              <h1 className={cn('font-display text-4xl font-semibold md:text-5xl xl:text-6xl', theme.heading)}>
+              <h2 className={cn('font-display text-4xl font-semibold md:text-5xl xl:text-6xl', theme.heading)}>
                 Vamos calcular juntos
-              </h1>
+              </h2>
             </Reveal>
             <Reveal effect="rise" delay={0.15}>
-              <h2 className={cn('font-heading text-base font-light md:text-lg', theme.muted)}>
+              <p className={cn('font-heading text-base font-light md:text-lg', theme.muted)}>
                 Sem ancoragem barata
-              </h2>
+              </p>
             </Reveal>
           </div>
 
@@ -64,7 +64,7 @@ export function Pricing() {
                 Total: R$ 150.000,00
               </p>
               <p className={cn('max-w-lg font-heading text-sm font-light leading-snug text-balance md:text-base', theme.muted)}>
-                Este é o valor que poderiamos cobrar com tranquilidade no acesso ao Mastermind se formos somar todas as entregas
+                Este é o valor que poderíamos cobrar com tranquilidade no acesso ao Mastermind se formos somar todas as entregas
               </p>
             </div>
           </Reveal>

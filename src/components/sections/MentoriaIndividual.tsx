@@ -41,17 +41,17 @@ export function MentoriaIndividual() {
             <p className={cn('text-xs font-semibold uppercase tracking-[0.2em]', theme.muted)}>
               Mentoria Estratégica Individual
             </p>
-            <h1 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
+            <h2 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
               Um encontro exclusivo de{' '}
               <span className={theme.accent}>boas-vindas</span>{' '}
               com o Dr.&nbsp;Gustavo Sá
-            </h1>
+            </h2>
           </Reveal>
 
           <ul className="flex flex-col gap-3">
             {bullets.map((bullet, index) => (
-              <Reveal key={bullet} effect="rise" delay={0.35 + index * 0.1}>
-                <li>
+              <li key={bullet}>
+                <Reveal effect="rise" delay={0.35 + index * 0.1}>
                   <GlassCard className="gap-2 p-4 md:p-5">
                     <div className="flex items-baseline gap-3">
                       <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
@@ -60,8 +60,8 @@ export function MentoriaIndividual() {
                       <p className={cn('text-lg leading-snug md:text-xl', theme.text)}>{bullet}</p>
                     </div>
                   </GlassCard>
-                </li>
-              </Reveal>
+                </Reveal>
+              </li>
             ))}
           </ul>
         </div>

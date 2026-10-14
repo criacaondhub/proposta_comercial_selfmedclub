@@ -25,14 +25,14 @@ export function Recap() {
         {/* Conteúdo centralizado */}
         <div className="flex flex-1 flex-col items-center justify-center gap-5 text-center md:gap-6">
           <Reveal effect="rise" delay={0.15}>
-            <h1 className={cn('font-display text-5xl font-semibold text-balance md:text-6xl xl:text-7xl', theme.heading)}>
+            <h2 className={cn('font-display text-5xl font-semibold text-balance md:text-6xl xl:text-7xl', theme.heading)}>
               Recapitulando…
-            </h1>
+            </h2>
           </Reveal>
           <Reveal effect="rise" delay={0.3}>
-            <h2 className={cn('max-w-2xl font-heading text-lg font-light leading-snug text-balance md:text-xl xl:text-2xl', theme.muted)}>
+            <p className={cn('max-w-2xl font-heading text-lg font-light leading-snug text-balance md:text-xl xl:text-2xl', theme.muted)}>
               O que torna este programa único e quanto valeria cada uma das entregas individualmente?
-            </h2>
+            </p>
           </Reveal>
         </div>
       </section>

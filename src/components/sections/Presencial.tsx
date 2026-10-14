@@ -24,7 +24,7 @@ export function Presencial() {
             </p>
 
             {/* H1 */}
-            <h1
+            <h2
               className={cn(
                 'font-display text-4xl font-semibold text-balance md:text-5xl',
                 theme.heading,
@@ -33,7 +33,7 @@ export function Presencial() {
               <span className={theme.accent}>4 Experiências intimistas</span>
               <br />
               {'com Gustavo Sá e outros membros.'}
-            </h1>
+            </h2>
           </Reveal>
 
           {/* Nota */}
