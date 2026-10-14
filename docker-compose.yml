@@ -5,7 +5,7 @@ services:
     image: selfmedclub-proposta:latest
     build: .
     networks:
-      - UltramarNet
+      - GustavoSaNet
     deploy:
       mode: replicated
       replicas: 1
@@ -23,6 +23,6 @@ services:
         - traefik.http.services.selfmedclub-proposta.loadbalancer.passHostHeader=true
 
 networks:
-  UltramarNet:
-    name: UltramarNet
+  GustavoSaNet:
+    name: GustavoSaNet
     external: true
