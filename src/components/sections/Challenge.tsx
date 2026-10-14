@@ -1,4 +1,4 @@
-import { TbHeartbeat, TbTrendingUp, TbVaccine } from 'react-icons/tb'
+import { TbCurrencyDollar, TbHeartbeat, TbTrendingUp } from 'react-icons/tb'
 import { CHALLENGE } from '@/config/content'
 import { SLIDE_THEME } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
@@ -9,7 +9,7 @@ import { Reveal } from '@/components/ui/Reveal'
 const theme = SLIDE_THEME.light
 
 const ICONS = {
-  pen: TbVaccine,
+  money: TbCurrencyDollar,
   growth: TbTrendingUp,
   health: TbHeartbeat,
 } as const

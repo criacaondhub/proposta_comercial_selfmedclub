@@ -32,7 +32,7 @@ export const ABOUT = {
 
 export const QUOTE = {
   // Trecho entre *asteriscos* fica na Armany (fonte do h1), em itálico e negrito
-  text: 'A liberdade e os resultados que tenho não vieram apenas dos meus estudos. *Vieram do dia que decidi parar de ser o centro da minha clínica* e comecei a construir um negócio de verdade.',
+  text: 'Não adianta ser bom, é preciso ser visto. *Eu só conquistei os resultados que tenho* porque entendi como se constrói autoridade e audiência para crescer o meu nome e o da minha clínica.',
   author: 'Dr. Gustavo Sá',
 } as const
 
@@ -48,10 +48,16 @@ export const STATEMENT = {
 export const CHALLENGE = {
   title: 'Qual o tamanho do *mercado* que estamos?',
   text: 'E quanto ele tem crescido a cada ano?',
-  // Valores entre *asteriscos* ficam em destaque. Ícones: pen | growth | health
+  // Valores entre *asteriscos* ficam em destaque. Ícones: money | growth | health
   items: [
-    { icon: 'pen', text: 'Mercado de canetas emagrecedoras deve chegar a *R$20 bi* no Brasil com genéricos' },
-    { icon: 'growth', text: 'Mercado de obesidade e diabetes movimentará *R$572 bilhões* até 2030' },
+    {
+      icon: 'money',
+      text: 'Mercado de *clínicas médicas* e *cuidado com o corpo num geral*, movimentaram mais de *R$500 bilhões* de reais no Brasil no ano passado.',
+    },
+    {
+      icon: 'growth',
+      text: 'Nos próximos dez anos, a tendência é este mercado crescer +49%. Vivemos numa era onde saúde, longevidade e cuidados com o corpo se tornaram o novo hype.',
+    },
     { icon: 'health', text: 'Setor de saúde e bem-estar consolida\nresiliência e *faturamento bilionário*' },
   ],
 } as const
@@ -154,7 +160,7 @@ export const MILESTONES = {
 
 export const PRESENCIAL = {
   tagline: 'PRESENCIAL',
-  title: '4 Experiências intimistas com Gustavo Sá e outros membros.',
+  title: '4 Experiências presenciais com Gustavo Sá e outros membros.',
   note: 'Datas das experiências presenciais a serem definidas com a turma.',
   image: {
     src: asset('/assets/geral/Slide-13.webp'),

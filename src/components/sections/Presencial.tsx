@@ -30,7 +30,7 @@ export function Presencial() {
                 theme.heading,
               )}
             >
-              <span className={theme.accent}>4 Experiências intimistas</span>
+              <span className={theme.accent}>4 Experiências presenciais</span>
               <br />
               {'com Gustavo Sá e outros membros.'}
             </h2>
