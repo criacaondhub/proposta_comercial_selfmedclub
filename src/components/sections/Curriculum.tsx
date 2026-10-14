@@ -3,6 +3,7 @@ import { CURRICULUM } from '@/config/content'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
+import { highlightWords } from '@/lib/highlight'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -24,7 +25,7 @@ export function Curriculum() {
     <SlideVariantContext.Provider value="light">
       <section
         id="conteudos"
-        className="relative isolate w-full shrink-0 overflow-hidden bg-background text-text md:grid md:h-svh md:grid-cols-[1.15fr_1fr]"
+        className="relative isolate w-full shrink-0 overflow-hidden bg-background text-text md:grid md:h-svh md:grid-cols-[1fr_1.3fr] md:grid-rows-1"
       >
         <div className="absolute inset-0 -z-10 bg-grain-dark" aria-hidden />
 
@@ -41,7 +42,7 @@ export function Curriculum() {
                 theme.heading,
               )}
             >
-              {block.title}
+              {highlightWords(block.title, block.highlight, theme.accent)}
             </h2>
           </Reveal>
 
@@ -59,8 +60,8 @@ export function Curriculum() {
                     {item.sub && (
                       <div className="flex flex-wrap gap-x-4 gap-y-1 pl-7">
                         {item.sub.map((sub) => (
-                          <span key={sub} className={cn('flex items-center gap-1.5 text-xs leading-snug', theme.muted)}>
-                            <span className="size-1 shrink-0 rounded-full bg-accent-light" aria-hidden />
+                          <span key={sub} className={cn('flex items-center gap-2 text-sm leading-snug md:text-base', theme.muted)}>
+                            <span className="size-1.5 shrink-0 rounded-full bg-accent-light" aria-hidden />
                             {sub}
                           </span>
                         ))}
@@ -75,12 +76,11 @@ export function Curriculum() {
 
         {/* Coluna direita — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
-          {/* ⚠️ IMAGEM PROVISÓRIA — trocar pela imagem final do slide 08 */}
           <img
-            src="/assets/05-entregaveis/Backgroud-Slide-05.webp"
+            src="/assets/geral/Slide-08.webp"
             alt=""
             decoding="async"
-            className="block h-full w-full object-cover"
+            className="block h-full w-full object-cover object-[60%_center]"
           />
         </Reveal>
       </section>

@@ -47,7 +47,7 @@ export function Challenge() {
             theme.heading,
           )}
         >
-          {CHALLENGE.title}
+          {renderHighlight(CHALLENGE.title)}
         </h2>
         <p className={cn('max-w-xl font-heading text-lg font-light leading-relaxed md:text-xl xl:text-2xl', theme.text)}>
           {CHALLENGE.text}

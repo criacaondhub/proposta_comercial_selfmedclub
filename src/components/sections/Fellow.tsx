@@ -59,7 +59,7 @@ export function Fellow() {
         {/* Coluna direita — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
           <img
-            src="/assets/geral/imagem-slide-21.webp"
+            src="/assets/geral/Slide-21.webp"
             alt=""
             decoding="async"
             className="block h-full w-full object-cover"

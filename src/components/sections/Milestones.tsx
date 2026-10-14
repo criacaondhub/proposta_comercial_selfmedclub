@@ -21,7 +21,7 @@ export function Milestones() {
             <Reveal effect="rise">
               <h1
                 className={cn(
-                  'max-w-3xl font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
+                  'max-w-4xl font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl',
                   theme.heading,
                 )}
               >

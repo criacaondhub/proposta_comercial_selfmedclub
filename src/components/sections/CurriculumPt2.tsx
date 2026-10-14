@@ -13,6 +13,7 @@ import { CURRICULUM } from '@/config/content'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
+import { highlightWords } from '@/lib/highlight'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -46,7 +47,7 @@ export function CurriculumPt2() {
     <SlideVariantContext.Provider value="light">
       <section
         id="conteudos-2"
-        className="relative isolate w-full shrink-0 overflow-hidden bg-background text-text md:grid md:h-svh md:grid-cols-[1.15fr_1fr]"
+        className="relative isolate w-full shrink-0 overflow-hidden bg-background text-text md:grid md:h-svh md:grid-cols-[1fr_1.3fr] md:grid-rows-1"
       >
         <div className="absolute inset-0 -z-10 bg-grain-dark" aria-hidden />
 
@@ -63,19 +64,19 @@ export function CurriculumPt2() {
                 theme.heading,
               )}
             >
-              {block.title}
+              {highlightWords(block.title, block.highlight, theme.accent)}
             </h2>
           </Reveal>
 
-          <ul className="grid grid-cols-2 gap-2">
+          <ul className="grid auto-rows-fr grid-cols-2 gap-2">
             <AnimatePresence mode="popLayout">
               {block.items.slice(0, visibleCount).map((item, index) => {
                 const Icon = ICONS[index]
                 return (
-                  <motion.li key={item.text} {...ITEM_ANIMATION}>
-                    <GlassCard className="h-full gap-2 p-3 md:p-4">
-                      <Icon className={cn('size-6 shrink-0', theme.accent)} aria-hidden />
-                      <p className={cn('text-base leading-snug md:text-lg', theme.text)}>
+                  <motion.li key={item.text} className="h-full" {...ITEM_ANIMATION}>
+                    <GlassCard className="h-full flex-row items-center gap-3 p-3 md:p-4">
+                      <Icon className={cn('size-5 shrink-0', theme.accent)} aria-hidden />
+                      <p className={cn('text-sm leading-snug text-pretty md:text-base', theme.text)}>
                         {item.text.split('\n').map((line, i, arr) => (
                           <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
                         ))}
@@ -91,10 +92,10 @@ export function CurriculumPt2() {
         {/* Coluna direita — imagem full-bleed */}
         <Reveal effect="unveil" delay={0.3} className="hidden overflow-hidden md:block">
           <img
-            src="/assets/05-entregaveis/Backgroud-Slide-05.webp"
+            src="/assets/geral/Slide-09.webp"
             alt=""
             decoding="async"
-            className="block h-full w-full object-cover"
+            className="block h-full w-full object-cover object-[25%_center]"
           />
         </Reveal>
       </section>

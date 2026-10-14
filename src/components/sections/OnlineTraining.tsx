@@ -66,7 +66,7 @@ export function OnlineTraining() {
                       >
                         <Icon className="size-5" />
                       </span>
-                      <p className={cn('text-lg leading-relaxed md:text-xl', theme.text)}>
+                      <p className={cn('text-lg leading-relaxed text-pretty md:text-xl', theme.text)}>
                         {item.text.split('\n').map((line, i, arr) => (
                           <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
                         ))}

@@ -58,7 +58,7 @@ export const STATEMENT = {
 } as const
 
 export const CHALLENGE = {
-  title: 'Qual o tamanho do mercado que estamos?',
+  title: 'Qual o tamanho do *mercado* que estamos?',
   text: 'E quanto ele tem crescido a cada ano?',
   // Valores entre *asteriscos* ficam em destaque. Ícones: pen | growth | health
   items: [
@@ -102,7 +102,7 @@ export const ONLINE_TRAINING = {
     { icon: 'host', text: 'Duas mentorias por mês com o\nDr. Gustavo Sá sobre temas diversos' },
     {
       icon: 'guests',
-      text: 'Marketing, vendas, Gestão e muito mais.',
+      text: 'Marketing, vendas, Gestão e muito mais.',
     },
     {
       icon: 'platform',
@@ -110,10 +110,9 @@ export const ONLINE_TRAINING = {
     },
     { icon: 'app', text: 'Aplicativo Próprio para uma experiência única.' },
   ],
-  // ⚠️ IMAGEM PROVISÓRIA — trocar pela imagem final do slide 07
   image: {
-    src: '/assets/05-entregaveis/Backgroud-Slide-05.webp',
-    alt: '',
+    src: '/assets/geral/Slide-07.webp',
+    alt: 'Homem de suéter ao lado de um microfone e latas de filme',
   },
 } as const
 
@@ -133,13 +132,14 @@ type CurriculumItem = { text: string; sub?: readonly string[] }
 export const CURRICULUM: {
   tagline: string
   title: string
-  blocks: readonly { title: string; items: readonly CurriculumItem[] }[]
+  blocks: readonly { title: string; highlight?: readonly string[]; items: readonly CurriculumItem[] }[]
 } = {
   tagline: 'Formação online',
   title: 'Conteúdos técnicos e práticos para você escalar seus resultados enquanto aperfeiçoa suas técnicas',
   blocks: [
     {
       title: 'Bastidores práticos:',
+      highlight: ['práticos'],
       items: [
         { text: 'Bastidores do Long Life:', sub: ['Estruturação de time;', 'Processos internos;', 'Gestão da clínica.'] },
         { text: 'Processos comerciais e vendas na prática;' },
@@ -150,10 +150,11 @@ export const CURRICULUM: {
     },
     {
       title: 'Gestão da clínica e mais:',
+      highlight: ['Gestão', 'clínica'],
       items: [
         { text: 'Como precificar seus atendimentos;' },
         { text: 'Como aumentar seu ticket médio;' },
-        { text: 'Como lotar sua agenda e ter um bom\nposicionamento no digital;' },
+        { text: 'Como lotar sua agenda e ter um bom posicionamento no digital;' },
         { text: 'Construindo um atendimento premium;' },
         { text: 'Gestão financeira da clínica;' },
         { text: 'Construindo autoridade e reputação;' },
@@ -213,8 +214,10 @@ export const PRESENCIAL = {
   tagline: 'PRESENCIAL',
   title: '4 Experiências intimistas com Gustavo Sá e outros membros.',
   note: 'Datas das experiências presenciais a serem definidas com a turma.',
-  // ⚠️ IMAGEM PROVISÓRIA — trocar pela imagem final do slide 13
-  image: { src: '/assets/05-entregaveis/Backgroud-Slide-05.webp', alt: '' },
+  image: {
+    src: '/assets/geral/Slide-13.webp',
+    alt: 'Vista aérea de membros reunidos em uma mesa longa com o monograma SM',
+  },
 } as const
 
 export const FEATURES = {
