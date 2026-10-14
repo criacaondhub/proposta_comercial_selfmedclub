@@ -80,17 +80,14 @@ export const SOLUTION = {
   ],
 } as const
 
-// ⚠️ IMAGEM PROVISÓRIA — trocar pela imagem de cada entregável
-const DELIVERABLE_PLACEHOLDER_IMAGE = '/assets/05-entregaveis/Backgroud-Slide-05.webp'
-
 export const DELIVERABLES = {
   tag: 'Entregáveis',
   // Ícones: platform | events | mentoring | network
   items: [
-    { icon: 'platform', title: 'PLATAFORMA EDUCACIONAL COMPLETA', image: DELIVERABLE_PLACEHOLDER_IMAGE },
-    { icon: 'events', title: 'EXPERIÊNCIAS PRESENCIAIS', image: DELIVERABLE_PLACEHOLDER_IMAGE },
-    { icon: 'mentoring', title: 'MENTORIAS ONLINE', image: DELIVERABLE_PLACEHOLDER_IMAGE },
-    { icon: 'network', title: 'GRUPO DE NETWORKING SELETO E FECHADO', image: DELIVERABLE_PLACEHOLDER_IMAGE },
+    { icon: 'platform', title: 'PLATAFORMA EDUCACIONAL COMPLETA', image: '/assets/geral/Plataforma-de-ensino.webp' },
+    { icon: 'events', title: 'EXPERIÊNCIAS PRESENCIAIS', image: '/assets/geral/Slide-13.webp' },
+    { icon: 'mentoring', title: 'MENTORIAS ONLINE', image: '/assets/geral/Mentorias-online.webp' },
+    { icon: 'network', title: 'GRUPO DE NETWORKING SELETO E FECHADO', image: '/assets/geral/Grupo-de-networking.webp' },
   ],
 } as const
 
