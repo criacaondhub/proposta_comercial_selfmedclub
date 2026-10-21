@@ -1,5 +1,6 @@
 import { TbAffiliate, TbCalendarStar, TbDeviceLaptop, TbVideo } from 'react-icons/tb'
 import { DELIVERABLES } from '@/config/content'
+import { useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -12,13 +13,15 @@ const ICONS = {
 
 // Slide em tela cheia dividido em 4 quadrantes, um por entregável, na ordem do content
 // (superior esquerdo → superior direito → inferior esquerdo → inferior direito). No mobile ficam empilhados.
-// Cada foto leva um véu escuro leve + degradê inferior para o título e os bullets se destacarem.
-// Entrada: cada quadrante é revelado por uma cortina, um após o outro
+// Cada foto leva um véu escuro leve + degradê inferior; o título fica numa tarja azul.
+// Entrada: cada quadrante é revelado por uma cortina — no deck, um por clique (etapa 0 = só o fundo off-white)
 export function Deliverables() {
+  const steps = useSlideSteps()
+
   return (
     <section
       id="entregaveis"
-      className="relative w-full shrink-0 overflow-hidden bg-background-dark md:h-svh md:w-screen"
+      className="relative w-full shrink-0 overflow-hidden bg-background md:h-svh md:w-screen"
     >
       <ul className="grid gap-1.5 md:h-full md:grid-cols-2 md:grid-rows-2">
         {DELIVERABLES.items.map((item, index) => {
@@ -27,7 +30,12 @@ export function Deliverables() {
 
           return (
             <li key={item.title} className="min-h-96 md:min-h-0">
-              <Reveal effect="wipe" delay={index * 0.15} className="h-full">
+              <Reveal
+                effect="wipe"
+                delay={steps ? 0 : index * 0.15}
+                visible={steps ? steps.step > index : undefined}
+                className="h-full"
+              >
                 <div
                   className={cn(
                     'relative flex h-full flex-col justify-end overflow-hidden px-6 pt-24 pb-8 md:px-10 md:pt-10',
@@ -47,27 +55,11 @@ export function Deliverables() {
                     aria-hidden
                   />
 
-                  <div className="relative z-10 flex max-w-xl flex-col gap-item [text-shadow:0_2px_14px_rgba(0,0,0,0.55)]">
-                    <h3 className="flex items-center gap-3 text-xl font-semibold leading-tight tracking-[0.01em] text-section-heading md:text-[clamp(1.25rem,1.9vw,2rem)]">
-                      <span
-                        className="h-[1.3em] w-[3px] flex-none rounded-[3px] bg-accent-light shadow-[0_0_12px_color-mix(in_srgb,var(--color-accent-light)_60%,transparent)]"
-                        aria-hidden
-                      />
-                      <Icon className="size-[1.2em] shrink-0" aria-hidden />
-                      {item.title}
-                    </h3>
-                    <ul className="flex flex-col gap-1.5">
-                      {item.bullets.map((bullet) => (
-                        <li
-                          key={bullet}
-                          className="flex items-center gap-3 text-base leading-snug text-section-text md:text-[clamp(0.95rem,1.15vw,1.2rem)]"
-                        >
-                          <span className="size-1.5 shrink-0 rounded-full bg-accent-light" aria-hidden />
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {/* Pílula no mesmo estilo da tag "Entregáveis", um pouco maior */}
+                  <h3 className="relative z-10 flex max-w-full items-center gap-2.5 self-start rounded-full border border-border-section bg-accent/90 px-5 py-2 font-heading text-xs font-light uppercase leading-snug tracking-[0.18em] text-accent-foreground backdrop-blur-glass md:whitespace-nowrap md:px-6 md:py-2.5 md:text-[clamp(0.75rem,0.95vw,0.95rem)] md:tracking-[0.25em]">
+                    <Icon className="size-[1.3em] shrink-0" aria-hidden />
+                    {item.title}
+                  </h3>
                 </div>
               </Reveal>
             </li>

@@ -1,7 +1,7 @@
 import type { IconType } from 'react-icons'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
-import { highlightWords } from '@/lib/highlight'
+import { markWords } from '@/lib/highlight'
 import { useSlideSteps } from '@/lib/slide-steps'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
@@ -14,7 +14,10 @@ type FeatureSlideProps = {
   title: string
   /** Trechos do título pintados com a cor de destaque */
   highlight?: readonly string[]
-  items: readonly { icon: IconType; title: string; text: string }[]
+  /** Trechos do título riscados (ex.: palavra "corrigida" pela seguinte) */
+  strike?: readonly string[]
+  /** highlight = trechos do texto do box em destaque */
+  items: readonly { icon: IconType; title: string; text: string; highlight?: readonly string[] }[]
   image: { src: string; alt: string }
   /** Ex.: 'object-[60%_center]' para reenquadrar a foto */
   imageClassName?: string
@@ -29,6 +32,7 @@ export function FeatureSlide({
   tagline,
   title,
   highlight,
+  strike,
   items,
   image,
   imageClassName,
@@ -76,16 +80,21 @@ export function FeatureSlide({
                 theme.heading,
               )}
             >
-              {highlightWords(title, highlight, theme.accent)}
+              {markWords(title, [
+                { words: highlight, className: theme.accent },
+                { words: strike, className: cn('line-through decoration-accent decoration-[0.07em]', theme.muted) },
+              ])}
             </h2>
           </Reveal>
 
           <ul className="grid gap-3 sm:grid-cols-2">
             {items.map((item, index) => {
               const Icon = item.icon
+              // Com número ímpar de boxes, o último ocupa a linha inteira
+              const isLoneLast = items.length % 2 === 1 && index === items.length - 1
 
               return (
-                <li key={item.title}>
+                <li key={item.title} className={cn(isLoneLast && 'sm:col-span-2')}>
                   <Reveal
                     effect="drop"
                     delay={steps ? 0 : 0.25 + index * 0.12}
@@ -104,7 +113,9 @@ export function FeatureSlide({
                           {item.title}
                         </h3>
                       </div>
-                      <p className={cn('text-base leading-normal text-pretty', theme.text)}>{item.text}</p>
+                      <p className={cn('text-base leading-normal whitespace-pre-line text-pretty', theme.text)}>
+                        {markWords(item.text, [{ words: item.highlight, className: cn('font-semibold', theme.accent) }])}
+                      </p>
                     </GlassCard>
                   </Reveal>
                 </li>

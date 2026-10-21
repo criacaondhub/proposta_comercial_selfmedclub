@@ -1,18 +1,24 @@
+import { TbBooks, TbCalendarTime, TbClipboardCheck } from 'react-icons/tb'
+import { WORKSHOP } from '@/config/content'
 import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
+import { useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
 
 const theme = SLIDE_THEME.light
 
-const bullets = [
-  'Acesso a uma biblioteca de roteiros de anúncios já validados para você replicar e conseguir ter clientes querendo fechar com você;',
-  'Os nossos especialistas em marketing avaliarão os seus anúncios gravados para você\nsair do Workshop com eles prontos;',
-  'Na prática, meu estrategista de marketing pessoal abrirá 2 horas da agenda\ndele para uma imersão completa com vocês.',
-]
+const ICONS = {
+  library: TbBooks,
+  review: TbClipboardCheck,
+  strategist: TbCalendarTime,
+} as const
 
 export function Workshop() {
+  // No deck, os blocos aparecem um por clique (etapa 0 = só o título)
+  const steps = useSlideSteps()
+
   return (
     <SlideVariantContext.Provider value="light">
       <section
@@ -50,24 +56,31 @@ export function Workshop() {
           </Reveal>
 
           <ul className="flex flex-col gap-3">
-            {bullets.map((bullet, index) => (
-              <li key={index}>
-                <Reveal effect="rise" delay={0.35 + index * 0.1}>
-                  <GlassCard className="gap-2 p-4 md:p-5">
-                    <div className="flex items-baseline gap-3">
-                      <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <p className={cn('text-lg leading-snug md:text-xl', theme.text)}>
-                        {bullet.split('\n').map((line, i, arr) => (
-                          <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
-                        ))}
-                      </p>
-                    </div>
-                  </GlassCard>
-                </Reveal>
-              </li>
-            ))}
+            {WORKSHOP.items.map((item, index) => {
+              const Icon = ICONS[item.icon]
+
+              return (
+                <li key={index}>
+                  <Reveal
+                    effect="rise"
+                    delay={steps ? 0 : 0.35 + index * 0.1}
+                    visible={steps ? steps.step > index : undefined}
+                  >
+                    <GlassCard className="gap-2 p-4 md:p-5">
+                      <div className="flex items-center gap-4">
+                        <span
+                          className={cn('flex size-10 shrink-0 items-center justify-center rounded-full', theme.accentBg)}
+                          aria-hidden
+                        >
+                          <Icon className="size-5" />
+                        </span>
+                        <p className={cn('text-lg leading-snug text-pretty md:text-xl', theme.text)}>{item.text}</p>
+                      </div>
+                    </GlassCard>
+                  </Reveal>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </section>

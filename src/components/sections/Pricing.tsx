@@ -1,3 +1,4 @@
+import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
 import { Reveal } from '@/components/ui/Reveal'
@@ -26,9 +27,16 @@ export function Pricing() {
         <div className="absolute inset-0 -z-10 bg-grain" aria-hidden />
 
         <div className="flex w-full max-w-3xl flex-col gap-6 md:gap-8">
-          {/* Heading */}
+          {/* Heading — logo por escrito (versão clara, para o fundo azul) acima do título */}
           <div className="flex flex-col items-center gap-1 text-center">
-            <Reveal effect="drop">
+            <Reveal effect="drop" className="mb-4 md:mb-6">
+              <img
+                src={asset('/assets/01-capa/Logo-horizontal-branco.svg')}
+                alt="SelfMed Club"
+                className="h-10 w-auto md:h-12"
+              />
+            </Reveal>
+            <Reveal effect="drop" delay={0.1}>
               <h2 className={cn('font-display text-4xl font-semibold md:text-5xl xl:text-6xl', theme.heading)}>
                 Vamos calcular juntos
               </h2>

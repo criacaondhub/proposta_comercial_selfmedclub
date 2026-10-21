@@ -1,19 +1,25 @@
+import { TbBuildingHospital, TbEye, TbSchool, TbStethoscope } from 'react-icons/tb'
+import { FELLOW } from '@/config/content'
 import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
+import { useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
 
 const theme = SLIDE_THEME.light
 
-const bullets = [
-  'Acompanhe de perto a rotina clínica do Dr. Gustavo Sá;',
-  'Observe os protocolos e a aplicação prática dos conhecimentos;',
-  'Vivencie o dia a dia de um consultório de referência;',
-  'Aprofunde seus conhecimentos diretamente na prática.',
-]
+const ICONS = {
+  routine: TbStethoscope,
+  protocols: TbEye,
+  clinic: TbBuildingHospital,
+  practice: TbSchool,
+} as const
 
 export function Fellow() {
+  // No deck, os blocos aparecem um por clique (etapa 0 = só o título)
+  const steps = useSlideSteps()
+
   return (
     <SlideVariantContext.Provider value="light">
       <section
@@ -40,20 +46,31 @@ export function Fellow() {
           </Reveal>
 
           <ul className="flex flex-col gap-3">
-            {bullets.map((bullet, index) => (
-              <li key={bullet}>
-                <Reveal effect="rise" delay={0.35 + index * 0.1}>
-                  <GlassCard className="gap-2 p-4 md:p-5">
-                    <div className="flex items-baseline gap-3">
-                      <span className={cn('shrink-0 text-xs font-medium tabular-nums', theme.muted)}>
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <p className={cn('text-lg leading-snug md:text-xl', theme.text)}>{bullet}</p>
-                    </div>
-                  </GlassCard>
-                </Reveal>
-              </li>
-            ))}
+            {FELLOW.items.map((item, index) => {
+              const Icon = ICONS[item.icon]
+
+              return (
+                <li key={item.text}>
+                  <Reveal
+                    effect="rise"
+                    delay={steps ? 0 : 0.35 + index * 0.1}
+                    visible={steps ? steps.step > index : undefined}
+                  >
+                    <GlassCard className="gap-2 p-4 md:p-5">
+                      <div className="flex items-center gap-4">
+                        <span
+                          className={cn('flex size-10 shrink-0 items-center justify-center rounded-full', theme.accentBg)}
+                          aria-hidden
+                        >
+                          <Icon className="size-5" />
+                        </span>
+                        <p className={cn('text-lg leading-snug text-pretty md:text-xl', theme.text)}>{item.text}</p>
+                      </div>
+                    </GlassCard>
+                  </Reveal>
+                </li>
+              )
+            })}
           </ul>
         </div>
 

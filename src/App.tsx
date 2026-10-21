@@ -1,6 +1,16 @@
 import { asset } from '@/lib/asset'
 import { MotionConfig } from 'framer-motion'
-import { EXPERIENCES, NETWORKING, ONLINE_MENTORING, ONLINE_TRAINING } from '@/config/content'
+import {
+  CONCIERGE,
+  DELIVERABLES,
+  EXPERIENCES,
+  FELLOW,
+  MENTORIA_INDIVIDUAL,
+  NETWORKING,
+  ONLINE_MENTORING,
+  ONLINE_TRAINING,
+  WORKSHOP,
+} from '@/config/content'
 import { HorizontalScroll } from '@/components/ui/HorizontalScroll'
 import { Cover } from '@/components/sections/Cover'
 import { About } from '@/components/sections/About'
@@ -27,12 +37,19 @@ import { Offer } from '@/components/sections/Offer'
 import { Decision } from '@/components/sections/Decision'
 import { CallOffer } from '@/components/sections/CallOffer'
 
+// Slide 06: os quadrantes aparecem um por clique — etapa 0 mostra só o fundo
 // Slides 07 a 10: os boxes aparecem um por clique — etapa 0 mostra só título e foto
+// Slides 16 a 19 (bônus): os blocos aparecem um por clique — etapa 0 mostra só título e foto
 const BOX_STEPS = [
+  { component: Deliverables, count: DELIVERABLES.items.length + 1 },
   { component: OnlineTraining, count: ONLINE_TRAINING.items.length + 1 },
   { component: Experiences, count: EXPERIENCES.items.length + 1 },
   { component: OnlineMentoring, count: ONLINE_MENTORING.items.length + 1 },
   { component: Networking, count: NETWORKING.items.length + 1 },
+  { component: Concierge, count: CONCIERGE.items.length + 1 },
+  { component: Workshop, count: WORKSHOP.items.length + 1 },
+  { component: Fellow, count: FELLOW.items.length + 1 },
+  { component: MentoriaIndividual, count: MENTORIA_INDIVIDUAL.items.length + 1 },
 ]
 
 function App() {

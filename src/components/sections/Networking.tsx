@@ -1,12 +1,11 @@
-import { TbAffiliate, TbBriefcase, TbLock, TbUserCheck } from 'react-icons/tb'
+import { TbBrandWhatsapp, TbGift, TbUserCheck } from 'react-icons/tb'
 import { NETWORKING } from '@/config/content'
 import { FeatureSlide } from '@/components/ui/FeatureSlide'
 
 const ICONS = {
   curated: TbUserCheck,
-  closed: TbLock,
-  network: TbAffiliate,
-  business: TbBriefcase,
+  community: TbBrandWhatsapp,
+  referral: TbGift,
 } as const
 
 const items = NETWORKING.items.map((item) => ({ ...item, icon: ICONS[item.icon] }))

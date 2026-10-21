@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import { ABOUT } from '@/config/content'
 import { SLIDE_THEME } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
@@ -7,21 +6,7 @@ import { Reveal, RevealWords } from '@/components/ui/Reveal'
 
 const theme = SLIDE_THEME.section
 
-// Entrada: linhas da tagline se estendem, título sobe palavra por palavra, subtítulo entra em foco
-function TaglineLine({ origin }: { origin: 'left' | 'right' }) {
-  return (
-    <motion.span
-      className="h-px w-8 bg-section-tagline md:w-12"
-      style={{ originX: origin === 'left' ? 1 : 0 }}
-      initial={{ scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      aria-hidden
-    />
-  )
-}
-
+// Entrada: brasão entra em foco, título sobe palavra por palavra, subtítulo entra em foco
 export function About() {
   return (
     <Slide
@@ -30,24 +15,19 @@ export function About() {
       background={<div className="absolute inset-0 bg-grain" />}
       className="items-center justify-center text-center md:h-full"
     >
-      <div className="flex flex-col items-center gap-item md:gap-item-lg">
-        <Reveal effect="blur">
-          <p className="flex items-center gap-item text-base font-semibold uppercase tracking-[0.2em] text-section-tagline md:text-lg">
-            <TaglineLine origin="left" />
-            {ABOUT.tagline}
-            <TaglineLine origin="right" />
-          </p>
-        </Reveal>
+      {/* Brasão no topo — no desktop sai do fluxo para o texto ficar no centro exato */}
+      <Reveal effect="blur" className="flex justify-center md:absolute md:inset-x-0 md:top-slide-y-lg">
+        <img src={ABOUT.symbol.src} alt={ABOUT.symbol.alt} className="h-16 w-auto md:h-24" />
+      </Reveal>
 
-        <h2
-          className={cn(
-            'max-w-5xl font-display text-4xl font-semibold text-balance md:text-6xl xl:text-7xl',
-            theme.heading,
-          )}
-        >
-          <RevealWords text={ABOUT.title} delay={0.4} />
-        </h2>
-      </div>
+      <h2
+        className={cn(
+          'max-w-5xl font-display text-4xl font-semibold text-balance md:text-6xl xl:text-7xl',
+          theme.heading,
+        )}
+      >
+        <RevealWords text={ABOUT.title} delay={0.4} />
+      </h2>
 
       <Reveal effect="blur" delay={1.1}>
         <p
