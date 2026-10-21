@@ -20,8 +20,10 @@ export function Experiences() {
       strike={EXPERIENCES.strike}
       items={items}
       image={EXPERIENCES.image}
-      imageClassName="object-[60%_center]"
+      // Foto larga: os quatro integrantes ficam na metade direita — coluna maior e foto alinhada à direita
+      imageClassName="object-[96%_center]"
       imageSide="right"
+      wideImage
     />
   )
 }

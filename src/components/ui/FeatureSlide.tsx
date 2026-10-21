@@ -23,6 +23,8 @@ type FeatureSlideProps = {
   imageClassName?: string
   /** Lado da foto — o conteúdo fica no lado oposto. Padrão: esquerda */
   imageSide?: 'left' | 'right'
+  /** Foto ocupando metade da tela (em vez de ~42%) — para fotos largas com pessoas espalhadas */
+  wideImage?: boolean
 }
 
 // Slide claro: foto full-bleed de um lado, tagline + título + boxes (ícone, título e texto) em grade 2×2 do outro.
@@ -37,6 +39,7 @@ export function FeatureSlide({
   image,
   imageClassName,
   imageSide = 'left',
+  wideImage = false,
 }: FeatureSlideProps) {
   // No deck, os boxes aparecem um por clique: etapa 0 mostra só título e foto, cada etapa seguinte revela um box.
   // No mobile (sem deck) entram juntos, em cascata, ao aparecer na tela.
@@ -48,7 +51,11 @@ export function FeatureSlide({
         id={id}
         className={cn(
           'relative isolate w-full shrink-0 overflow-hidden bg-background text-text md:grid md:h-svh',
-          imageSide === 'left' ? 'md:grid-cols-[1fr_1.4fr]' : 'md:grid-cols-[1.4fr_1fr]',
+          wideImage
+            ? 'md:grid-cols-2'
+            : imageSide === 'left'
+              ? 'md:grid-cols-[1fr_1.4fr]'
+              : 'md:grid-cols-[1.4fr_1fr]',
         )}
       >
         <div className="absolute inset-0 -z-10 bg-grain-dark" aria-hidden />

@@ -140,7 +140,7 @@ export const EXPERIENCES = {
     {
       icon: 'live',
       title: 'Mentorias com Dr. Gustavo Sá',
-      text: '2 encontros AO VIVO por mês com o Dr. Gustavo Sá.',
+      text: '2 encontros AO VIVO por mês com o Dr.\u00a0Gustavo\u00a0Sá.',
       highlight: ['2 encontros'],
     },
     {

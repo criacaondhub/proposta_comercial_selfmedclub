@@ -28,6 +28,11 @@
 
   /* Azul da marca clareado — destaques sobre fundos escuros (contraste 6,3 sobre #1a1a1a) */
   --color-accent-light: #7b98f0;
+  /* Azul claro do total e da nota do slide 21 (sobre o degradê escuro da capa) */
+  --color-accent-pale: #84a7ed;
+
+  /* Preço antigo riscado na oferta (slide 22) — contraste 5,3 sobre o preto */
+  --color-price-old: #ef4444;
 
   /* Tags neon do slide de marcos (contraste sobre o azul #1e3fa8: ciano 6,7 · amarelo 6,9) */
   --color-neon-online: #5cf2ff;

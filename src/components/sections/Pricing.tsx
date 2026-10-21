@@ -2,6 +2,7 @@ import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
 import { Reveal } from '@/components/ui/Reveal'
+import { DarkBackground } from '@/components/ui/DarkBackground'
 
 const theme = SLIDE_THEME.section
 
@@ -22,9 +23,12 @@ export function Pricing() {
     <SlideVariantContext.Provider value="section">
       <section
         id="pricing"
-        className="relative isolate flex h-svh w-full shrink-0 flex-col items-center justify-center overflow-hidden bg-background-section px-slide-x py-slide-y md:w-screen md:px-slide-x-lg md:py-slide-y-lg"
+        className="relative isolate flex h-svh w-full shrink-0 flex-col items-center justify-center overflow-hidden px-slide-x py-slide-y md:w-screen md:px-slide-x-lg md:py-slide-y-lg"
       >
-        <div className="absolute inset-0 -z-10 bg-grain" aria-hidden />
+        {/* Mesmo fundo do slide 13 (Dúvidas): degradê azul escuro da capa + ruído */}
+        <div className="absolute inset-0 -z-10" aria-hidden>
+          <DarkBackground />
+        </div>
 
         <div className="flex w-full max-w-3xl flex-col gap-6 md:gap-8">
           {/* Heading — logo por escrito (versão clara, para o fundo azul) acima do título */}
@@ -68,10 +72,11 @@ export function Pricing() {
           {/* Total */}
           <Reveal effect="rise" delay={0.95}>
             <div className="flex flex-col items-center gap-2 text-center">
-              <p className={cn('font-display text-3xl font-semibold md:text-4xl xl:text-5xl', theme.heading)}>
+              {/* Total e nota em azul claro (#84a7ed) */}
+              <p className="font-display text-3xl font-semibold text-accent-pale md:text-4xl xl:text-5xl">
                 Total: R$ 150.000,00
               </p>
-              <p className={cn('max-w-lg font-heading text-sm font-light leading-snug text-balance md:text-base', theme.muted)}>
+              <p className="max-w-lg font-heading text-sm font-light leading-snug text-balance text-accent-pale md:text-base">
                 Este é o valor que poderíamos cobrar com tranquilidade no acesso ao Mastermind se formos somar todas as entregas
               </p>
             </div>

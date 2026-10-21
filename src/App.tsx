@@ -34,12 +34,12 @@ import { MentoriaIndividual } from '@/components/sections/MentoriaIndividual'
 import { Recap } from '@/components/sections/Recap'
 import { Pricing } from '@/components/sections/Pricing'
 import { Offer } from '@/components/sections/Offer'
-import { Decision } from '@/components/sections/Decision'
 import { CallOffer } from '@/components/sections/CallOffer'
 
 // Slide 06: os quadrantes aparecem um por clique — etapa 0 mostra só o fundo
 // Slides 07 a 10: os boxes aparecem um por clique — etapa 0 mostra só título e foto
 // Slides 16 a 19 (bônus): os blocos aparecem um por clique — etapa 0 mostra só título e foto
+// Slide 22: o segundo clique cobre a oferta com vidro embaçado e mostra a condição exclusiva
 const BOX_STEPS = [
   { component: Deliverables, count: DELIVERABLES.items.length + 1 },
   { component: OnlineTraining, count: ONLINE_TRAINING.items.length + 1 },
@@ -50,6 +50,7 @@ const BOX_STEPS = [
   { component: Workshop, count: WORKSHOP.items.length + 1 },
   { component: Fellow, count: FELLOW.items.length + 1 },
   { component: MentoriaIndividual, count: MENTORIA_INDIVIDUAL.items.length + 1 },
+  { component: Offer, count: 2 },
 ]
 
 function App() {
@@ -84,7 +85,6 @@ function App() {
           <Recap />
           <Pricing />
           <Offer />
-          <Decision />
           <CallOffer />
         </HorizontalScroll>
       </main>
