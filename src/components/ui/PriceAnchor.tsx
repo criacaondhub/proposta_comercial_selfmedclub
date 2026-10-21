@@ -18,6 +18,8 @@ type PriceAnchorProps = {
   tone?: 'dark' | 'blue'
   /** Preço "DE": riscado em vermelho, ou em branco translúcido com o risco sendo desenhado */
   strike?: 'red' | 'animated'
+  /** Tarja de desconto: no rodapé do bloco, ou dourada logo acima do "à vista" (no mobile continua no rodapé) */
+  discountPlacement?: 'bottom' | 'badge'
 }
 
 const STRIKE_EASE = [0.65, 0, 0.35, 1] as const
@@ -74,8 +76,10 @@ export function PriceAnchor({
   discount,
   tone = 'dark',
   strike = 'red',
+  discountPlacement = 'bottom',
 }: PriceAnchorProps) {
   const colors = TONES[tone]
+  const isBadge = discountPlacement === 'badge'
 
   return (
     <div className="flex flex-col items-center gap-8 text-center md:gap-12">
@@ -103,12 +107,22 @@ export function PriceAnchor({
         {/* POR — à vista e parcelado */}
         <Reveal effect="rise" delay={0.4}>
           <div className="flex flex-col items-center gap-2 md:gap-3">
-            <div className="flex items-baseline gap-3">
+            {/* items-baseline-last: o "à vista" (última linha da coluna da direita) fica na linha de base do preço */}
+            <div className="flex items-baseline-last gap-3">
               <span className={cn('text-sm font-semibold uppercase tracking-widest', colors.label)}>POR</span>
               <span className="font-display text-6xl font-semibold tabular-nums text-white md:text-7xl xl:text-8xl">
                 {to}
               </span>
-              <span className={cn('text-sm font-semibold uppercase tracking-widest', colors.label)}>à vista</span>
+              <div className="flex flex-col items-start gap-3">
+                {isBadge && (
+                  <Reveal effect="pop" delay={0.9} className="hidden md:block">
+                    <p className="rounded-full border border-gold/50 bg-gold/10 px-4 py-1.5 text-xs font-medium whitespace-nowrap uppercase tracking-[0.18em] text-gold">
+                      Desconto de <span className="font-semibold">{discount}</span>
+                    </p>
+                  </Reveal>
+                )}
+                <span className={cn('text-sm font-semibold uppercase tracking-widest', colors.label)}>à vista</span>
+              </div>
             </div>
             <p className={cn('font-display text-2xl font-semibold tabular-nums md:text-3xl xl:text-4xl', colors.installments)}>
               {installments}
@@ -129,8 +143,8 @@ export function PriceAnchor({
         </Reveal>
       </div>
 
-      {/* Desconto */}
-      <Reveal effect="rise" delay={0.6}>
+      {/* Desconto — no modo tarja, só aparece aqui no mobile */}
+      <Reveal effect="rise" delay={0.6} className={cn(isBadge && 'md:hidden')}>
         <div className={cn('rounded-full border px-6 py-2.5 backdrop-blur-sm', colors.pill)}>
           <p className="text-sm font-medium uppercase tracking-[0.2em]">
             Desconto de <span className="font-semibold text-white">{discount}</span>

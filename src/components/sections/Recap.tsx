@@ -14,17 +14,15 @@ export function Recap() {
       >
         <div className="absolute inset-0 -z-10 bg-grain" aria-hidden />
 
-        {/* Logo topo */}
-        <Reveal effect="rise">
-          <img
-            src={asset('/assets/01-capa/Logo-vertical-branco.svg')}
-            alt="SelfMed Club"
-            className="h-16 w-auto opacity-90 md:h-20"
-          />
-        </Reveal>
-
-        {/* Conteúdo centralizado */}
+        {/* Conteúdo centralizado — brasão logo acima do título */}
         <div className="flex flex-1 flex-col items-center justify-center gap-5 text-center md:gap-6">
+          <Reveal effect="rise" className="mb-4 md:mb-8">
+            <img
+              src={asset('/assets/01-capa/Logo-vertical-branco.svg')}
+              alt="SelfMed Club"
+              className="h-28 w-auto md:h-36 xl:h-44"
+            />
+          </Reveal>
           <Reveal effect="rise" delay={0.15}>
             <h2 className={cn('font-display text-5xl font-semibold text-balance md:text-6xl xl:text-7xl', theme.heading)}>
               Recapitulando…

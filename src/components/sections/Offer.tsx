@@ -42,7 +42,7 @@ export function Offer() {
       >
 
         <div className="flex h-full items-center justify-center px-slide-x py-slide-y md:px-slide-x-lg md:py-slide-y-lg">
-          <PriceAnchor {...OFFER} tone="dark" />
+          <PriceAnchor {...OFFER} tone="dark" discountPlacement="badge" />
         </div>
 
         {/* Vidro embaçado na frente da oferta + condição exclusiva (o logo é desenhado ao entrar) */}

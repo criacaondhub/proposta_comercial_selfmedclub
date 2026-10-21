@@ -34,6 +34,9 @@
   /* Preço antigo riscado na oferta (slide 22) — contraste 5,3 sobre o preto */
   --color-price-old: #ef4444;
 
+  /* Dourado da tarja de desconto da oferta (slide 22) */
+  --color-gold: #d9b46c;
+
   /* Tags neon do slide de marcos (contraste sobre o azul #1e3fa8: ciano 6,7 · amarelo 6,9) */
   --color-neon-online: #5cf2ff;
   --color-neon-presencial: #ffe14d;
