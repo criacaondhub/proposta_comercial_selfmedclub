@@ -17,7 +17,7 @@ services:
         # Só a subpasta da proposta; o resto do domínio continua no serviço atual
         - traefik.http.routers.selfmedclub-proposta.rule=Host(`dr.gustavosa.com.br`) && PathPrefix(`/selfmedclub/proposta`)
         # Prioridade explícita: vence o router do site principal no mesmo domínio
-        - traefik.http.routers.selfmedclub-proposta.priority=1000
+        - traefik.http.routers.selfmedclub-proposta.priority=2000
         - traefik.http.routers.selfmedclub-proposta.entrypoints=websecure
         - traefik.http.routers.selfmedclub-proposta.tls.certresolver=letsencryptresolver
         - traefik.http.routers.selfmedclub-proposta.service=selfmedclub-proposta
