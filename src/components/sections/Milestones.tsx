@@ -7,6 +7,12 @@ import { Reveal } from '@/components/ui/Reveal'
 
 const theme = SLIDE_THEME.section
 
+// Cor neon de cada tipo de encontro — ver @utility neon em index.css
+const NEON = {
+  ONLINE: '[--neon:var(--color-neon-online)]',
+  PRESENCIAL: '[--neon:var(--color-neon-presencial)]',
+} as const
+
 export function Milestones() {
   return (
     <SlideVariantContext.Provider value="section">
@@ -46,14 +52,17 @@ export function Milestones() {
                     <span className={cn('text-xs font-medium tabular-nums', theme.muted)}>
                       {String(index + 1).padStart(2, '0')}
                     </span>
+                    {/* Tag neon com ponto pulsando, estilo "ao vivo" */}
                     <span
                       className={cn(
-                        'rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.15em]',
-                        event.tagline === 'ONLINE'
-                          ? 'bg-section-accent/15 text-section-accent'
-                          : 'bg-white/10 text-white/80',
+                        'neon inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.18em]',
+                        NEON[event.tagline],
                       )}
                     >
+                      <span className="relative flex size-1.5" aria-hidden>
+                        <span className="absolute inset-0 rounded-full bg-(--neon) motion-safe:animate-ping" />
+                        <span className="relative size-1.5 rounded-full bg-(--neon) shadow-[0_0_6px_var(--neon)]" />
+                      </span>
                       {event.tagline}
                     </span>
                   </div>

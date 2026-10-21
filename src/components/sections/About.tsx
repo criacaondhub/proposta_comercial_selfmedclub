@@ -11,7 +11,7 @@ const theme = SLIDE_THEME.section
 function TaglineLine({ origin }: { origin: 'left' | 'right' }) {
   return (
     <motion.span
-      className={cn('h-px w-8 md:w-12', theme.divider)}
+      className="h-px w-8 bg-section-tagline md:w-12"
       style={{ originX: origin === 'left' ? 1 : 0 }}
       initial={{ scaleX: 0 }}
       whileInView={{ scaleX: 1 }}
@@ -32,7 +32,7 @@ export function About() {
     >
       <div className="flex flex-col items-center gap-item md:gap-item-lg">
         <Reveal effect="blur">
-          <p className={cn('flex items-center gap-item text-sm font-medium uppercase tracking-[0.2em]', theme.muted)}>
+          <p className="flex items-center gap-item text-base font-semibold uppercase tracking-[0.2em] text-section-tagline md:text-lg">
             <TaglineLine origin="left" />
             {ABOUT.tagline}
             <TaglineLine origin="right" />

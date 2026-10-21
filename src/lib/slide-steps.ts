@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 
 /**
- * Etapas internas de um slide (ex.: painéis da galeria de entregáveis).
+ * Etapas internas de um slide (ex.: boxes dos slides 07–10, revelados um por clique).
  * A navegação do deck percorre as etapas antes de trocar de slide.
  * null = sem deck (mobile) — o componente se controla sozinho.
  */

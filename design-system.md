@@ -32,6 +32,7 @@ A apresentação alterna dois tipos de slide: **claro** (padrão, `#dcddcf`) e *
 | `section-heading` | `#fafafa` | `text-section-heading` | Títulos e subtítulos | 8.6 |
 | `section-text` | `#dcddcf` | `text-section-text` | Texto corrido | 6.6 |
 | `section-muted` | `rgba(250,250,250,0.7)` | `text-section-muted` | Legendas, rótulos, numeração | ≥ 4.5 |
+| `section-tagline` | `#92b8fa` | `text-section-tagline` | Tagline do slide 02 ("Mais que uma Mentoria ou Mastermind") | 4.5 |
 | `section-accent` | `#fafafa` | `bg-section-accent` / `text-section-accent` | CTAs e destaques em slide azul | 8.6 |
 | `section-accent-hover` | `#dcddcf` | `hover:bg-section-accent-hover` | Hover de elementos com `section-accent` | — |
 | `section-accent-foreground` | `#1e3fa8` | `text-section-accent-foreground` | Texto sobre `bg-section-accent` (botões) | 8.6 |
@@ -63,6 +64,17 @@ bg-surface-section backdrop-blur-glass border border-border-section rounded-glas
 
 **Slide claro:** `bg-accent text-accent-foreground hover:bg-accent-hover`
 **Slide azul:** `bg-section-accent text-section-accent-foreground hover:bg-section-accent-hover`
+
+### Tags neon (slide de marcos)
+
+Tags ONLINE / PRESENCIAL do slide 12 em estilo neon: borda acesa, brilho no texto e na pílula e ponto pulsando. A cor vem da variável `--neon`, aplicada junto com o utilitário `neon` (`src/index.css`).
+
+| Token | Valor | Uso | Contraste sobre `#1e3fa8` |
+|---|---|---|---|
+| `neon-online` | `#5cf2ff` | Tag ONLINE — `neon [--neon:var(--color-neon-online)]` | 6.7 |
+| `neon-presencial` | `#ffe14d` | Tag PRESENCIAL — `neon [--neon:var(--color-neon-presencial)]` | 6.9 |
+
+> Só em slide azul — sobre o creme o brilho some e o amarelo não tem contraste.
 
 ---
 
@@ -105,7 +117,7 @@ A Armany é aplicada automaticamente a `h1` e `h2` em `@layer base`.
 
 - **Desktop/Tablet (≥ 768px):** slides empilhados (`absolute inset-0`) num container `h-svh overflow-hidden`; o índice atual muda só por clique nos botões do `SlideProgress` ou pelas setas ←/→ (PageUp/PageDown). Transição em camadas (1,1s, `ease [0.77, 0, 0.175, 1]`): o slide novo desliza por cima do atual com sombra, e o anterior recua ao fundo (escala 0,88, cantos de 28px, véu escuro de 65% e parallax de 28% no sentido do empurrão). Voltando, o atual sai e o anterior volta à frente. A rolagem não move os slides.
 - **Entrada vertical:** componentes passados em `<HorizontalScroll enterFromBottom={[...]}>` sobem (e em `enterFromTop={[...]}` descem) por cima do slide anterior, que fica parado por baixo, em vez de virem da direita. Hoje: `Quote` (slide 04) sobe; `Statement` (slide 05) desce.
-- **Etapas internas:** slides passados em `<HorizontalScroll steps={[{ component, count }]}>` têm etapas — as setas percorrem as etapas antes de trocar de slide (voltando, o slide abre na última). O slide lê a etapa atual com `useSlideSteps()` (`src/lib/slide-steps.ts`). Hoje: `Deliverables` (slide 06), 1 etapa por painel da galeria.
+- **Etapas internas:** slides passados em `<HorizontalScroll steps={[{ component, count }]}>` têm etapas — as setas percorrem as etapas antes de trocar de slide (voltando, o slide abre na última). O slide lê a etapa atual com `useSlideSteps()` (`src/lib/slide-steps.ts`). Hoje: `OnlineTraining`, `Experiences`, `OnlineMentoring` e `Networking` (slides 07–10) — a etapa 0 mostra só título e foto e cada clique revela um box (`<Reveal visible>`).
 - **Mobile (< 768px):** sem translação — slides empilhados em coluna, rolagem vertical normal.
 - Touch targets mínimos de 44px em qualquer breakpoint.
 

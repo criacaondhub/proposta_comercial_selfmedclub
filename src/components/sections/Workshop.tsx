@@ -36,7 +36,7 @@ export function Workshop() {
           <Reveal effect="drop" className="flex flex-col gap-item md:gap-item-lg">
             <p className={cn('flex items-center gap-item text-sm font-medium uppercase tracking-[0.2em]', theme.accent)}>
               <span className="h-px w-8 bg-accent md:w-12" aria-hidden />
-              Bônus
+              Bônus 02
             </p>
             <p className={cn('text-xs font-semibold uppercase tracking-[0.2em]', theme.muted)}>
               Workshop Mão na Massa

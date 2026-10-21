@@ -27,7 +27,7 @@ export function Concierge() {
           <Reveal effect="drop" className="flex flex-col gap-item md:gap-item-lg">
             <p className={cn('flex items-center gap-item text-sm font-medium uppercase tracking-[0.2em]', theme.accent)}>
               <span className="h-px w-8 bg-accent md:w-12" aria-hidden />
-              Bônus
+              Bônus 01
             </p>
             <h2 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
               Concierge <span className={theme.accent}>Pessoal</span>

@@ -59,13 +59,16 @@ type RevealProps = {
   effect?: RevealEffect
   delay?: number
   className?: string
+  /** Controla a entrada manualmente (ex.: etapas do slide). Omitido = entra quando aparece na tela */
+  visible?: boolean
 }
 
-export function Reveal({ children, effect = 'rise', delay = 0, className }: RevealProps) {
+export function Reveal({ children, effect = 'rise', delay = 0, className, visible }: RevealProps) {
   const reduceMotion = useReducedMotion()
   const { from, to, duration } = EFFECTS[effect]
   const transition =
     effect === 'pop' ? { type: 'spring' as const, stiffness: 260, damping: 18, delay } : { duration, delay, ease: EASE }
+  const controlled = visible !== undefined
 
   // wipe e unveil recortam o elemento por clip-path até área zero — o IntersectionObserver então nunca o vê
   // entrar na tela. Por isso o invólucro (sem recorte) é observado e a cortina anima por dentro.
@@ -75,8 +78,9 @@ export function Reveal({ children, effect = 'rise', delay = 0, className }: Reve
       <motion.div
         className={className}
         initial={reduceMotion ? false : 'hidden'}
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.6 }}
+        {...(controlled
+          ? { animate: visible ? 'visible' : 'hidden' }
+          : { whileInView: 'visible', viewport: { once: true, amount: 0.6 } })}
       >
         <motion.div className="h-full" variants={{ hidden: from, visible: { ...to, transition } }}>
           {children}
@@ -89,8 +93,7 @@ export function Reveal({ children, effect = 'rise', delay = 0, className }: Reve
     <motion.div
       className={className}
       initial={reduceMotion ? false : from}
-      whileInView={to}
-      viewport={{ once: true, amount: 0.6 }}
+      {...(controlled ? { animate: visible ? to : from } : { whileInView: to, viewport: { once: true, amount: 0.6 } })}
       transition={transition}
     >
       {children}

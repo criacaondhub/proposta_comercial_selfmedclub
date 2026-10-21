@@ -1,7 +1,7 @@
 import { asset } from '@/lib/asset'
 import { MotionConfig } from 'framer-motion'
+import { EXPERIENCES, NETWORKING, ONLINE_MENTORING, ONLINE_TRAINING } from '@/config/content'
 import { HorizontalScroll } from '@/components/ui/HorizontalScroll'
-import { CURRICULUM, DELIVERABLES } from '@/config/content'
 import { Cover } from '@/components/sections/Cover'
 import { About } from '@/components/sections/About'
 import { Challenge } from '@/components/sections/Challenge'
@@ -9,13 +9,12 @@ import { Quote } from '@/components/sections/Quote'
 import { Statement } from '@/components/sections/Statement'
 import { Deliverables } from '@/components/sections/Deliverables'
 import { OnlineTraining } from '@/components/sections/OnlineTraining'
-import { Curriculum } from '@/components/sections/Curriculum'
-import { CurriculumPt2 } from '@/components/sections/CurriculumPt2'
+import { Experiences } from '@/components/sections/Experiences'
+import { OnlineMentoring } from '@/components/sections/OnlineMentoring'
+import { Networking } from '@/components/sections/Networking'
 import { NextSteps } from '@/components/sections/NextSteps'
 import { Milestones } from '@/components/sections/Milestones'
 import { FullImage } from '@/components/sections/FullImage'
-import { Presencial } from '@/components/sections/Presencial'
-import { Features } from '@/components/sections/Features'
 import { Doubts } from '@/components/sections/Doubts'
 import { Bonus } from '@/components/sections/Bonus'
 import { Concierge } from '@/components/sections/Concierge'
@@ -28,21 +27,23 @@ import { Offer } from '@/components/sections/Offer'
 import { Decision } from '@/components/sections/Decision'
 import { CallOffer } from '@/components/sections/CallOffer'
 
+// Slides 07 a 10: os boxes aparecem um por clique — etapa 0 mostra só título e foto
+const BOX_STEPS = [
+  { component: OnlineTraining, count: ONLINE_TRAINING.items.length + 1 },
+  { component: Experiences, count: EXPERIENCES.items.length + 1 },
+  { component: OnlineMentoring, count: ONLINE_MENTORING.items.length + 1 },
+  { component: Networking, count: NETWORKING.items.length + 1 },
+]
+
 function App() {
   return (
     <MotionConfig reducedMotion="user">
       <main>
-        {/* Slide 04 (citação) sobe por cima do 03; slide 05 (imagem) desce por cima do 04.
-            O 06 (entregáveis) percorre os 4 entregáveis antes de avançar.
-            Os slides 08 e 09 (conteúdos) revelam os itens um por clique. */}
+        {/* Slide 04 (citação) sobe por cima do 03; slide 05 (imagem) desce por cima do 04. */}
         <HorizontalScroll
           enterFromBottom={[Quote]}
           enterFromTop={[Statement]}
-          steps={[
-            { component: Deliverables, count: DELIVERABLES.items.length },
-            { component: Curriculum, count: CURRICULUM.blocks[0].items.length },
-            { component: CurriculumPt2, count: CURRICULUM.blocks[1].items.length },
-          ]}
+          steps={BOX_STEPS}
         >
           <Cover />
           <About />
@@ -51,14 +52,11 @@ function App() {
           <Statement />
           <Deliverables />
           <OnlineTraining />
-          <Curriculum />
-          <CurriculumPt2 />
+          <Experiences />
+          <OnlineMentoring />
+          <Networking />
           <NextSteps />
           <Milestones />
-          <FullImage id="slide-12" src={asset('/assets/geral/Capa-slide12.webp')} />
-          <Presencial />
-          <FullImage id="slide-14" src={asset('/assets/geral/Capa-slide14.webp')} />
-          <Features />
           <Doubts />
           <Bonus />
           <FullImage id="slide-18" src={asset('/assets/geral/capa-slide-18.webp')} />
