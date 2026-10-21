@@ -305,3 +305,25 @@ export const MENTORIA_INDIVIDUAL = {
     { icon: 'unlock', text: 'Identificarem juntos o que está travando seu crescimento.' },
   ],
 } as const
+
+// Slides 22 e 23 — ancoragem de preço (mesma diagramação nos dois)
+const INSTALLMENT_NOTE =
+  'Este parcelamento é sem comprometer o limite do seu cartão de crédito (você só precisa ter o limite da parcela)'
+
+export const OFFER = {
+  tagline: 'Mas você não vai pagar',
+  from: 'R$ 150.000,00',
+  to: 'R$ 90.000,00',
+  installments: 'ou 12x de R$ 7.900,00',
+  note: INSTALLMENT_NOTE,
+  discount: 'R$ 60.000,00',
+} as const
+
+export const CALL_OFFER = {
+  tagline: 'Oferta especial para fechamento em call',
+  from: 'R$ 90.000,00',
+  to: 'R$ 52.000,00',
+  installments: 'ou 12x de R$ 5.200,00',
+  note: INSTALLMENT_NOTE,
+  discount: 'R$ 38.000,00',
+} as const
