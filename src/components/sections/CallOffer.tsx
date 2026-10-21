@@ -13,7 +13,7 @@ export function CallOffer() {
         <div className="absolute inset-0 -z-10 bg-grain" aria-hidden />
 
         <div className="flex h-full items-center justify-center px-slide-x py-slide-y md:px-slide-x-lg md:py-slide-y-lg">
-          <PriceAnchor {...CALL_OFFER} tone="blue" strike="animated" />
+          <PriceAnchor {...CALL_OFFER} tone="blue" strike="animated" discountPlacement="badge" />
         </div>
       </section>
     </SlideVariantContext.Provider>

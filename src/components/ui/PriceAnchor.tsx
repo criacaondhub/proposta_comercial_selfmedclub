@@ -55,6 +55,8 @@ const TONES = {
     installments: 'text-white/80',
     note: 'text-white/50',
     pill: 'border-white/10 bg-white/5 text-white/60',
+    // Tarja ao lado do preço (discountPlacement="badge"): dourada no preto
+    badge: 'border-gold/50 bg-gold/10 text-gold',
   },
   blue: {
     tagline: 'text-section-muted',
@@ -63,6 +65,8 @@ const TONES = {
     installments: 'text-white/85',
     note: 'text-white/70',
     pill: 'border-white/15 bg-white/10 text-white/75',
+    // No azul: tarja branca com texto no azul da marca
+    badge: 'border-white bg-white text-accent',
   },
 } as const
 
@@ -116,7 +120,12 @@ export function PriceAnchor({
               <div className="flex flex-col items-start gap-3">
                 {isBadge && (
                   <Reveal effect="pop" delay={0.9} className="hidden md:block">
-                    <p className="rounded-full border border-gold/50 bg-gold/10 px-4 py-1.5 text-xs font-medium whitespace-nowrap uppercase tracking-[0.18em] text-gold">
+                    <p
+                      className={cn(
+                        'rounded-full border px-4 py-1.5 text-xs font-medium whitespace-nowrap uppercase tracking-[0.18em]',
+                        colors.badge,
+                      )}
+                    >
                       Desconto de <span className="font-semibold">{discount}</span>
                     </p>
                   </Reveal>
