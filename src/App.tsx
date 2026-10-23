@@ -43,8 +43,8 @@ import { CallOffer } from '@/components/sections/CallOffer'
 const BOX_STEPS = [
   { component: Deliverables, count: DELIVERABLES.items.length + 1 },
   { component: OnlineTraining, count: ONLINE_TRAINING.items.length + 1 },
-  { component: Experiences, count: EXPERIENCES.items.length + 1 },
   { component: OnlineMentoring, count: ONLINE_MENTORING.items.length + 1 },
+  { component: Experiences, count: EXPERIENCES.items.length + 1 },
   { component: Networking, count: NETWORKING.items.length + 1 },
   { component: Concierge, count: CONCIERGE.items.length + 1 },
   { component: Workshop, count: WORKSHOP.items.length + 1 },
@@ -70,8 +70,8 @@ function App() {
           <Statement />
           <Deliverables />
           <OnlineTraining />
-          <Experiences />
           <OnlineMentoring />
+          <Experiences />
           <Networking />
           <NextSteps />
           <Milestones />

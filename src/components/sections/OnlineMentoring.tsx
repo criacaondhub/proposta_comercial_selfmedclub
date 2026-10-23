@@ -1,12 +1,11 @@
-import { TbAward, TbCalendarStar, TbGlassFull, TbHeartHandshake } from 'react-icons/tb'
+import { TbClockPlay, TbUserStar, TbVideo } from 'react-icons/tb'
 import { ONLINE_MENTORING } from '@/config/content'
 import { FeatureSlide } from '@/components/ui/FeatureSlide'
 
 const ICONS = {
-  events: TbCalendarStar,
-  unique: TbAward,
-  dinner: TbGlassFull,
-  together: TbHeartHandshake,
+  live: TbVideo,
+  guests: TbUserStar,
+  replay: TbClockPlay,
 } as const
 
 const items = ONLINE_MENTORING.items.map((item) => ({ ...item, icon: ICONS[item.icon] }))

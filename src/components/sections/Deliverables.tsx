@@ -67,13 +67,13 @@ export function Deliverables() {
         })}
       </ul>
 
-      {/* Tag no canto superior esquerdo, sobre o primeiro quadrante */}
+      {/* Tag azul no centro da tela, no cruzamento dos quadrantes (no mobile, centralizada no topo) */}
       <Reveal
         effect="wipe"
         delay={0.6}
-        className="pointer-events-none absolute top-slide-y left-slide-x z-10 md:top-slide-y-lg md:left-slide-x-lg"
+        className="pointer-events-none absolute top-slide-y left-1/2 z-10 -translate-x-1/2 md:top-1/2 md:-translate-y-1/2"
       >
-        <p className="rounded-full border border-border-section bg-background-dark/50 px-4 py-1.5 font-heading text-xs font-light uppercase tracking-[0.25em] text-section-heading backdrop-blur-glass">
+        <p className="whitespace-nowrap rounded-full border border-border-section bg-accent px-4 py-1.5 font-heading text-xs font-light uppercase tracking-[0.25em] text-accent-foreground">
           {DELIVERABLES.tag}
         </p>
       </Reveal>

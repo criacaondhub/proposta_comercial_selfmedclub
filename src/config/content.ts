@@ -135,37 +135,6 @@ export const EXPERIENCES = {
   title: 'A primeira comunidade do Brasil com 4 eventos experiências no ano',
   highlight: ['experiências'],
   strike: ['eventos'],
-  // Ícones: live | guests | replay
-  items: [
-    {
-      icon: 'live',
-      title: 'Mentorias com Dr. Gustavo Sá',
-      text: '2 encontros AO VIVO por mês com o Dr.\u00a0Gustavo\u00a0Sá.',
-      highlight: ['2 encontros'],
-    },
-    {
-      icon: 'guests',
-      title: 'Mentorias com convidados especiais',
-      text: '1 encontro AO VIVO por mês com convidados especiais.',
-      highlight: ['convidados especiais'],
-    },
-    {
-      icon: 'replay',
-      title: 'Não se preocupe se não acompanhar todos AO VIVO',
-      text: 'Todos os encontros ficam salvos dentro da área de membros após 24 horas.',
-      highlight: ['Todos os encontros'],
-    },
-  ],
-  image: {
-    src: asset('/assets/geral/Slide-08.webp'),
-    alt: '',
-  },
-} as const
-
-export const ONLINE_MENTORING = {
-  tagline: 'Mentorias online',
-  title: 'Mais de 36 encontros AO VIVO por ano',
-  highlight: ['36 encontros'],
   // Ícones: events | unique | dinner | together
   items: [
     {
@@ -191,6 +160,37 @@ export const ONLINE_MENTORING = {
       title: 'Você fará parte disso',
       text: 'Todos os eventos são organizados junto aos membros.',
       highlight: ['eventos', 'organizados'],
+    },
+  ],
+  image: {
+    src: asset('/assets/geral/Slide-08.webp'),
+    alt: '',
+  },
+} as const
+
+export const ONLINE_MENTORING = {
+  tagline: 'Mentorias online',
+  title: 'Mais de 36 encontros AO VIVO por ano',
+  highlight: ['36 encontros'],
+  // Ícones: live | guests | replay
+  items: [
+    {
+      icon: 'live',
+      title: 'Mentorias com Dr. Gustavo Sá',
+      text: '2 encontros AO VIVO por mês com o Dr. Gustavo Sá.',
+      highlight: ['2 encontros'],
+    },
+    {
+      icon: 'guests',
+      title: 'Mentorias com convidados especiais',
+      text: '1 encontro AO VIVO por mês com convidados especiais.',
+      highlight: ['convidados especiais'],
+    },
+    {
+      icon: 'replay',
+      title: 'Não se preocupe se não acompanhar todos AO VIVO',
+      text: 'Todos os encontros ficam salvos dentro da área de membros após 24 horas.',
+      highlight: ['Todos os encontros'],
     },
   ],
   image: {
