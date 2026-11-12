@@ -2,7 +2,7 @@ import type { IconType } from 'react-icons'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
 import { markWords } from '@/lib/highlight'
-import { useSlideSteps } from '@/lib/slide-steps'
+import { useImageLoading, useSlideSteps } from '@/lib/slide-steps'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -44,6 +44,7 @@ export function FeatureSlide({
   // No deck, os boxes aparecem um por clique: etapa 0 mostra só título e foto, cada etapa seguinte revela um box.
   // No mobile (sem deck) entram juntos, em cascata, ao aparecer na tela.
   const steps = useSlideSteps()
+  const loading = useImageLoading()
 
   return (
     <SlideVariantContext.Provider value="light">
@@ -70,6 +71,8 @@ export function FeatureSlide({
             src={image.src}
             alt={image.alt}
             decoding="async"
+            fetchPriority="low"
+            loading={loading}
             className={cn('block h-full w-full object-cover', imageClassName)}
           />
         </Reveal>

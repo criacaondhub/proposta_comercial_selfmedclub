@@ -18,6 +18,7 @@ import {
   type MouseEvent,
   type ReactNode,
 } from 'react'
+import { useImageLoading } from '@/lib/slide-steps'
 import { gsap } from 'gsap'
 
 export interface AccordionGalleryItem {
@@ -77,6 +78,7 @@ const AccordionGallery = ({
   grayscale = true,
   className = '',
 }: AccordionGalleryProps) => {
+  const loading = useImageLoading()
   const rootRef = useRef<HTMLDivElement>(null)
   const panelRefs = useRef<(HTMLElement | null)[]>([])
   const mediaRefs = useRef<(HTMLElement | null)[]>([])
@@ -265,6 +267,9 @@ const AccordionGallery = ({
                 <img
                   src={item.image}
                   alt={item.alt || item.label || ''}
+                  decoding="async"
+                  fetchPriority="low"
+                  loading={loading}
                   draggable={false}
                   className="block h-full w-full select-none object-cover [-webkit-user-drag:none]"
                 />

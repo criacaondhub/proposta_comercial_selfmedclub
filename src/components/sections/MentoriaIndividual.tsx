@@ -2,7 +2,7 @@ import { TbClockHour1, TbLockOpen, TbRoute } from 'react-icons/tb'
 import { MENTORIA_INDIVIDUAL } from '@/config/content'
 import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
-import { useSlideSteps } from '@/lib/slide-steps'
+import { useImageLoading, useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
@@ -18,6 +18,7 @@ const ICONS = {
 export function MentoriaIndividual() {
   // No deck, os blocos aparecem um por clique (etapa 0 = só o título)
   const steps = useSlideSteps()
+  const loading = useImageLoading()
 
   return (
     <SlideVariantContext.Provider value="light">
@@ -33,6 +34,8 @@ export function MentoriaIndividual() {
             src={asset('/assets/geral/dr_gusa.webp')}
             alt="Dr. Gustavo Sá sentado à mesa do seu escritório"
             decoding="async"
+            fetchPriority="low"
+            loading={loading}
             className="block h-full w-full object-cover"
           />
         </Reveal>

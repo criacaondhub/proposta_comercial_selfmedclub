@@ -1,5 +1,9 @@
 import { asset } from '@/lib/asset'
+import { useImageLoading } from '@/lib/slide-steps'
+
 export function NextSteps() {
+  const loading = useImageLoading()
+
   return (
     <section
       id="proximos-passos"
@@ -9,6 +13,8 @@ export function NextSteps() {
         src={asset('/assets/geral/capa-slide-10.webp')}
         alt=""
         decoding="async"
+        fetchPriority="low"
+        loading={loading}
         className="absolute inset-0 h-full w-full object-cover"
       />
     </section>

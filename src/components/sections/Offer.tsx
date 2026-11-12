@@ -50,10 +50,13 @@ export function Offer() {
           {showGlass && (
             <motion.div
               key="vidro"
-              className="absolute inset-0 z-10 flex items-center justify-center bg-linear-to-b from-white/10 via-white/5 to-white/10 px-slide-x md:px-slide-x-lg"
-              initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-              animate={{ opacity: 1, backdropFilter: 'blur(28px)' }}
-              exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+              // O raio do desfoque fica fixo e só a opacidade anima: animar o blur de 0 a 28px
+              // obriga o navegador a refiltrar a tela inteira a cada frame — era o ponto mais
+              // pesado da apresentação.
+              className="absolute inset-0 z-10 flex items-center justify-center bg-linear-to-b from-white/10 via-white/5 to-white/10 px-slide-x backdrop-blur-[28px] md:px-slide-x-lg"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 1, ease: GLASS_EASE }}
             >
               <div className="pointer-events-none absolute inset-0 bg-grain" aria-hidden />

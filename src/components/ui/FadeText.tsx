@@ -11,11 +11,13 @@ type FadeTextProps = {
   className?: string
 }
 
+// Só a opacidade: são ~180 letras animando em cascata e cada filter: blur() obriga o
+// navegador a repintar aquela letra a cada frame — com dezenas delas ao mesmo tempo, era o
+// ponto mais pesado da citação. A cascata continua igual.
 const letter: Variants = {
-  hidden: { opacity: 0, filter: 'blur(4px)' },
+  hidden: { opacity: 0 },
   visible: (order: number) => ({
     opacity: 1,
-    filter: 'blur(0px)',
     transition: { duration: FADE_LETTER_MS / 1000, delay: order, ease: [0.4, 0, 0.2, 1] },
   }),
 }

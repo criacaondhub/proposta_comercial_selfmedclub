@@ -21,6 +21,11 @@ type HorizontalScrollProps = {
   steps?: { component: ComponentType; count: number }[]
 }
 
+// Quantos slides em volta do atual continuam sendo pintados. Os demais ficam com
+// visibility: hidden — seguem montados (estado e animações preservados), mas saem do
+// paint/composite do navegador, que é o que trava o deck com 20+ telas cheias no DOM.
+const PAINT_WINDOW = 2
+
 const NEXT_KEYS = ['ArrowRight', 'PageDown']
 const PREVIOUS_KEYS = ['ArrowLeft', 'PageUp']
 
@@ -103,8 +108,8 @@ function SlideDeck({ children, enterFromBottom = [], enterFromTop = [], steps = 
     const onKeyDown = (event: KeyboardEvent) => {
       // Componentes que tratam as setas por conta própria (ex.: galeria) chamam preventDefault
       if (event.defaultPrevented) return
-      const target = event.target as HTMLElement
-      if (target.closest('input, textarea, select, [contenteditable="true"]')) return
+      const target = event.target
+      if (target instanceof Element && target.closest('input, textarea, select, [contenteditable="true"]')) return
 
       if (NEXT_KEYS.includes(event.key)) {
         event.preventDefault()
@@ -125,20 +130,30 @@ function SlideDeck({ children, enterFromBottom = [], enterFromTop = [], steps = 
         {slides.map((slide, index) => {
           const { dim, ...pose } = poseFor(index, current, entries)
           const transition = reduceMotion ? { duration: 0 } : TRANSITION
+          const painted = Math.abs(index - current) <= PAINT_WINDOW
+          // O arredondamento das bordas troca de valor de uma vez, sem animar: animar
+          // border-radius repinta a tela cheia a cada frame. O salto acontece no começo do
+          // movimento, quando o slide já está saindo coberto pelo que entra.
+          const poseTransition = reduceMotion ? transition : { ...transition, borderRadius: { duration: 0 } }
 
           return (
             <motion.div
               key={index}
-              className="absolute inset-0 overflow-hidden will-change-transform"
-              style={{ zIndex: index }}
+              className="absolute inset-0 overflow-hidden"
+              style={{
+                zIndex: index,
+                visibility: painted ? 'visible' : 'hidden',
+                willChange: painted ? 'transform' : 'auto',
+              }}
               initial={false}
               animate={pose}
-              transition={transition}
+              transition={poseTransition}
               aria-hidden={index !== current}
               inert={index !== current}
             >
               <SlideStepsContext.Provider
                 value={{
+                  active: index === current,
                   step: index === current ? step : index < current ? stepCounts[index] - 1 : 0,
                   setStep: (next) =>
                     setPosition((previous) => (previous.current === index ? { ...previous, step: next } : previous)),

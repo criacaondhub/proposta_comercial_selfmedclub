@@ -1,6 +1,7 @@
 import { useEffect, useId, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useSlideSteps } from '@/lib/slide-steps'
 
 type LogoRevealProps = {
   src: string
@@ -54,11 +55,28 @@ function useLogoPaths(src: string) {
 export function LogoReveal({ src, viewBox, colors, label, delay = 0, strokeWidth = 1.6, className }: LogoRevealProps) {
   const paths = useLogoPaths(src)
   const reduceMotion = useReducedMotion()
+  // O brilho metálico é um loop infinito. Fora do slide ativo ele sai do DOM: animar um <rect>
+  // dentro de um clipPath revalida o SVG inteiro a cada frame, mesmo com o slide escondido.
+  const active = useSlideSteps()?.active ?? true
   const id = useId().replace(/[^a-zA-Z0-9_-]/g, '')
   const [, , width, height] = viewBox.split(/\s+/).map(Number)
 
   const fillDelay = delay + DRAW_DURATION * 0.7
   const sheenDelay = fillDelay + FILL_DURATION * 0.6
+
+  // O gradiente metálico só aparece no traço, que some assim que o logo é preenchido. Depois
+  // disso o <animateTransform> continuaria revalidando o SVG inteiro a cada frame, para sempre,
+  // sem nada na tela — então ele é removido quando o desenho termina.
+  const [drawn, setDrawn] = useState(false)
+
+  useEffect(() => {
+    if (!paths.length || reduceMotion) return
+    const end = (fillDelay + FILL_DURATION * 1.5 + paths.length * PATH_STAGGER * 0.5 + 0.3) * 1000
+    const timer = setTimeout(() => setDrawn(true), end)
+    return () => clearTimeout(timer)
+  }, [paths.length, fillDelay, reduceMotion])
+
+  const drawing = paths.length > 0 && !reduceMotion && !drawn
 
   return (
     <svg
@@ -84,7 +102,7 @@ export function LogoReveal({ src, viewBox, colors, label, delay = 0, strokeWidth
           <stop offset="0.5" style={{ stopColor: 'var(--color-metal-light)' }} />
           <stop offset="0.65" style={{ stopColor: 'var(--color-metal-warm)' }} />
           <stop offset="1" style={{ stopColor: 'var(--color-metal-shadow)' }} />
-          {!reduceMotion && (
+          {drawing && (
             <animateTransform
               attributeName="gradientTransform"
               type="translate"
@@ -129,7 +147,7 @@ export function LogoReveal({ src, viewBox, colors, label, delay = 0, strokeWidth
         />
       ))}
 
-      {!reduceMotion && paths.length > 0 && (
+      {active && !reduceMotion && paths.length > 0 && (
         <g clipPath={`url(#${id}-clip)`}>
           <motion.rect
             y={-height * 0.25}

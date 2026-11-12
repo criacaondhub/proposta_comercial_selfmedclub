@@ -235,21 +235,21 @@ export const MILESTONES = {
   subtitle: 'Sua jornada como Founder Member começa ainda em 2026.',
   events: [
     {
-      label: 'BOAS-VINDAS',
-      date: '29 OUT',
-      description: 'Encontro online de boas-vindas com todos os membros.',
-      tagline: 'ONLINE',
-    },
-    {
-      label: 'EXPERIÊNCIA PRESENCIAL',
-      date: '14 NOV',
-      description: 'Primeiro encontro presencial com todos os membros.',
+      label: 'JANTAR INTIMISTA',
+      date: '04 DEZ',
+      description: 'Jantar intimista com os membros.',
       tagline: 'PRESENCIAL',
     },
     {
-      label: 'ENCONTRO ONLINE',
+      label: 'PLANO 2027',
+      date: '05 DEZ',
+      description: 'Evento do Dr. Gustavo Sá com outros médicos.',
+      tagline: 'PRESENCIAL',
+    },
+    {
+      label: 'BOAS-VINDAS',
       date: '10 DEZ',
-      description: 'Primeira mentoria online com o Dr. Gustavo Sá.',
+      description: 'Encontro de boas-vindas com a turma.',
       tagline: 'ONLINE',
     },
   ],

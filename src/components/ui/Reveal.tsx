@@ -20,28 +20,30 @@ export type RevealEffect = 'rise' | 'blur' | 'left' | 'tilt' | 'zoom' | 'wipe' |
 // Expo out: entra decidido e pousa bem devagar
 const EASE = [0.16, 1, 0.3, 1] as const
 
-// Desfoque leve em quase todos os efeitos: o elemento "entra em foco" enquanto se move
+// O desfoque de entrada ficou só nos efeitos que existem para isso (blur e spread).
+// Nos efeitos de movimento ele saiu: animar filter: blur() obriga o navegador a repintar o
+// elemento a cada frame, e são vários por slide entrando junto com a troca de slide — era
+// uma das duas maiores fontes de travamento do deck.
 const SHARP = 'blur(0px)'
-const SOFT = 'blur(10px)'
 
 const EFFECTS: Record<RevealEffect, { from: TargetAndTransition; to: TargetAndTransition; duration: number }> = {
-  rise: { from: { opacity: 0, y: 32, filter: SOFT }, to: { opacity: 1, y: 0, filter: SHARP }, duration: 1.2 },
+  rise: { from: { opacity: 0, y: 32 }, to: { opacity: 1, y: 0 }, duration: 1.2 },
   blur: { from: { opacity: 0, filter: 'blur(18px)', scale: 1.05 }, to: { opacity: 1, filter: SHARP, scale: 1 }, duration: 1.6 },
-  left: { from: { opacity: 0, x: -72, filter: SOFT }, to: { opacity: 1, x: 0, filter: SHARP }, duration: 1.3 },
+  left: { from: { opacity: 0, x: -72 }, to: { opacity: 1, x: 0 }, duration: 1.3 },
   tilt: {
-    from: { opacity: 0, x: 90, rotateY: -24, filter: SOFT, transformPerspective: 1200 },
-    to: { opacity: 1, x: 0, rotateY: 0, filter: SHARP, transformPerspective: 1200 },
+    from: { opacity: 0, x: 90, rotateY: -24, transformPerspective: 1200 },
+    to: { opacity: 1, x: 0, rotateY: 0, transformPerspective: 1200 },
     duration: 1.4,
   },
-  zoom: { from: { opacity: 0, scale: 0.9, filter: SOFT }, to: { opacity: 1, scale: 1, filter: SHARP }, duration: 1.3 },
+  zoom: { from: { opacity: 0, scale: 0.9 }, to: { opacity: 1, scale: 1 }, duration: 1.3 },
   wipe: { from: { clipPath: 'inset(0% 100% 0% 0%)' }, to: { clipPath: 'inset(0% 0% 0% 0%)' }, duration: 1.4 },
-  drop: { from: { opacity: 0, y: -40, filter: SOFT }, to: { opacity: 1, y: 0, filter: SHARP }, duration: 1.2 },
+  drop: { from: { opacity: 0, y: -40 }, to: { opacity: 1, y: 0 }, duration: 1.2 },
   flip: {
-    from: { opacity: 0, rotateX: 60, y: 40, filter: SOFT, transformPerspective: 1000, originY: 1 },
-    to: { opacity: 1, rotateX: 0, y: 0, filter: SHARP, transformPerspective: 1000, originY: 1 },
+    from: { opacity: 0, rotateX: 60, y: 40, transformPerspective: 1000, originY: 1 },
+    to: { opacity: 1, rotateX: 0, y: 0, transformPerspective: 1000, originY: 1 },
     duration: 1.4,
   },
-  pop: { from: { opacity: 0, scale: 0.7, filter: SOFT }, to: { opacity: 1, scale: 1, filter: SHARP }, duration: 0.9 },
+  pop: { from: { opacity: 0, scale: 0.7 }, to: { opacity: 1, scale: 1 }, duration: 0.9 },
   spread: {
     from: { opacity: 0, letterSpacing: '0.12em', filter: 'blur(8px)' },
     to: { opacity: 1, letterSpacing: '0em', filter: SHARP },

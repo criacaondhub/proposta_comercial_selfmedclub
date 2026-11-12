@@ -4,6 +4,7 @@ import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
 import { cn } from '@/lib/utils'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
+import { useSlideSteps } from '@/lib/slide-steps'
 
 const theme = SLIDE_THEME.section
 
@@ -14,6 +15,10 @@ const NEON = {
 } as const
 
 export function Milestones() {
+  // O ponto pulsando é uma animação em loop: fora do slide ativo ela continuaria recalculando
+  // estilo a cada frame sem aparecer na tela
+  const active = useSlideSteps()?.active ?? true
+
   return (
     <SlideVariantContext.Provider value="section">
       <section
@@ -60,7 +65,7 @@ export function Milestones() {
                       )}
                     >
                       <span className="relative flex size-1.5" aria-hidden>
-                        <span className="absolute inset-0 rounded-full bg-(--neon) motion-safe:animate-ping" />
+                        {active && <span className="absolute inset-0 rounded-full bg-(--neon) motion-safe:animate-ping" />}
                         <span className="relative size-1.5 rounded-full bg-(--neon) shadow-[0_0_6px_var(--neon)]" />
                       </span>
                       {event.tagline}

@@ -1,6 +1,6 @@
 import { TbAffiliate, TbCalendarStar, TbDeviceLaptop, TbVideo } from 'react-icons/tb'
 import { DELIVERABLES } from '@/config/content'
-import { useSlideSteps } from '@/lib/slide-steps'
+import { useImageLoading, useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
 import { Reveal } from '@/components/ui/Reveal'
 
@@ -17,6 +17,7 @@ const ICONS = {
 // Entrada: cada quadrante é revelado por uma cortina — no deck, um por clique (etapa 0 = só o fundo off-white)
 export function Deliverables() {
   const steps = useSlideSteps()
+  const loading = useImageLoading()
 
   return (
     <section
@@ -46,6 +47,9 @@ export function Deliverables() {
                   <img
                     src={item.image}
                     alt={item.title}
+                    decoding="async"
+                    fetchPriority="low"
+                    loading={loading}
                     draggable={false}
                     className="absolute inset-0 size-full select-none object-cover"
                   />

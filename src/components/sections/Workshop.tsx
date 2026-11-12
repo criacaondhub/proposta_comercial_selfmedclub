@@ -2,7 +2,7 @@ import { TbBooks, TbCalendarTime, TbClipboardCheck } from 'react-icons/tb'
 import { WORKSHOP } from '@/config/content'
 import { asset } from '@/lib/asset'
 import { SLIDE_THEME, SlideVariantContext } from '@/lib/slide-theme'
-import { useSlideSteps } from '@/lib/slide-steps'
+import { useImageLoading, useSlideSteps } from '@/lib/slide-steps'
 import { cn } from '@/lib/utils'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { Reveal } from '@/components/ui/Reveal'
@@ -18,6 +18,7 @@ const ICONS = {
 export function Workshop() {
   // No deck, os blocos aparecem um por clique (etapa 0 = só o título)
   const steps = useSlideSteps()
+  const loading = useImageLoading()
 
   return (
     <SlideVariantContext.Provider value="light">
@@ -33,6 +34,8 @@ export function Workshop() {
             src={asset('/assets/geral/imagem-slide-20.webp')}
             alt=""
             decoding="async"
+            fetchPriority="low"
+            loading={loading}
             className="block h-full w-full object-cover"
           />
         </Reveal>

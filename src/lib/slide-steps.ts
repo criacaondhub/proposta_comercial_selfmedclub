@@ -8,10 +8,22 @@ import { createContext, useContext } from 'react'
 export type SlideSteps = {
   step: number
   setStep: (step: number) => void
+  /** true só no slide que está na tela — usado para parar animações em loop dos outros */
+  active: boolean
 }
 
 export const SlideStepsContext = createContext<SlideSteps | null>(null)
 
 export function useSlideSteps() {
   return useContext(SlideStepsContext)
+}
+
+/**
+ * Como carregar as imagens dos slides.
+ * No deck (desktop) elas precisam estar prontas antes do slide entrar — o navegador trata os
+ * slides seguintes como fora da tela e o lazy deixaria a imagem aparecer depois da transição.
+ * No mobile, que é uma página rolável normal, o lazy evita baixar todas as fotos de uma vez.
+ */
+export function useImageLoading(): 'eager' | 'lazy' {
+  return useSlideSteps() === null ? 'lazy' : 'eager'
 }

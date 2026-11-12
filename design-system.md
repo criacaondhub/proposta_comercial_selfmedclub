@@ -43,7 +43,7 @@ A apresentação alterna dois tipos de slide: **claro** (padrão, `#dcddcf`) e *
 
 ### Glassmorphism
 
-Receita: **fundo translúcido + desfoque + borda translúcida + raio**.
+Receita: **fundo translúcido + borda translúcida + raio**.
 
 | Token | Valor | Classe Tailwind |
 |---|---|---|
@@ -52,13 +52,17 @@ Receita: **fundo translúcido + desfoque + borda translúcida + raio**.
 
 **Card glass em slide claro:**
 ```
-bg-surface backdrop-blur-glass border border-border rounded-glass
+bg-surface border border-border rounded-glass
 ```
 
 **Card glass em slide azul:**
 ```
-bg-surface-section backdrop-blur-glass border border-border-section rounded-glass
+bg-surface-section border border-border-section rounded-glass
 ```
+
+> ⚠️ `backdrop-blur-glass` só em vidro sobre **foto** (ex.: o véu da oferta no slide 22).
+> Sobre fundo chapado o desfoque não muda nada na tela e pesa: o navegador refiltra o fundo
+> de cada card a cada frame da transição. Por isso o `GlassCard` não usa mais.
 
 ### Botões
 
@@ -120,6 +124,26 @@ A Armany é aplicada automaticamente a `h1` e `h2` em `@layer base`.
 - **Etapas internas:** slides passados em `<HorizontalScroll steps={[{ component, count }]}>` têm etapas — as setas percorrem as etapas antes de trocar de slide (voltando, o slide abre na última). O slide lê a etapa atual com `useSlideSteps()` (`src/lib/slide-steps.ts`). Hoje: `OnlineTraining`, `Experiences`, `OnlineMentoring` e `Networking` (slides 07–10) — a etapa 0 mostra só título e foto e cada clique revela um box (`<Reveal visible>`).
 - **Mobile (< 768px):** sem translação — slides empilhados em coluna, rolagem vertical normal.
 - Touch targets mínimos de 44px em qualquer breakpoint.
+
+---
+
+### Performance do deck (regras)
+
+Os 23 slides ficam todos montados no DOM ao mesmo tempo. Para o deck não travar:
+
+- **Só os vizinhos são pintados.** `HorizontalScroll` deixa os slides fora da janela
+  (`PAINT_WINDOW`) com `visibility: hidden` e `will-change: auto`. Eles continuam montados.
+- **Nada de animar `filter: blur()`, `backdrop-filter` ou `border-radius`.** São propriedades
+  de pintura: o navegador repinta o elemento inteiro a cada frame. Desfoque pode existir, mas
+  com valor fixo (ex.: o véu da oferta no slide 22 anima só a opacidade).
+- **Animação de entrada = `transform` + `opacity`.** É o que o compositor faz sozinho.
+  Os efeitos do `Reveal` seguem essa regra; `blur` e `spread` são as exceções deliberadas.
+- **Loop infinito só no slide ativo.** `useSlideSteps()?.active` diz se o slide está na tela;
+  fora dele o loop sai do DOM (ponto pulsando dos marcos, brilho do logo da capa).
+- **Imagens:** `decoding="async"` + `fetchPriority="low"` (a capa não tem foto, então nenhuma
+  foto disputa o primeiro paint) e `loading={useImageLoading()}` — `eager` no deck, onde a
+  foto precisa estar pronta antes do slide entrar, e `lazy` no mobile, que é página rolável.
+  WebP de fotos em qualidade ~88; nada de WebP lossless (ficam 4–7× maiores).
 
 ---
 
