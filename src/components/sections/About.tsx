@@ -15,8 +15,12 @@ export function About() {
       background={<div className="absolute inset-0 bg-grain" />}
       className="items-center justify-center text-center md:h-full"
     >
-      {/* Brasão no topo — no desktop sai do fluxo para o texto ficar no centro exato */}
-      <Reveal effect="blur" className="flex justify-center md:absolute md:inset-x-0 md:top-slide-y-lg">
+      {/* Brasão no topo — só sai do fluxo quando a tela tem altura para isso: em telas baixas
+          o título, que fica centralizado, subia por cima dele */}
+      <Reveal
+        effect="blur"
+        className="flex justify-center md:[@media(min-height:820px)]:absolute md:[@media(min-height:820px)]:inset-x-0 md:[@media(min-height:820px)]:top-slide-y-lg"
+      >
         <img src={ABOUT.symbol.src} alt={ABOUT.symbol.alt} className="h-16 w-auto md:h-24" />
       </Reveal>
 

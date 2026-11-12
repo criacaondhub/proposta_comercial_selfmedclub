@@ -41,7 +41,7 @@ export function MentoriaIndividual() {
         </Reveal>
 
         {/* Coluna direita — conteúdo */}
-        <div className="flex flex-col justify-center gap-group px-slide-x py-slide-y md:gap-group-lg md:px-slide-x-lg md:py-slide-y-lg">
+        <div className="flex flex-col justify-center gap-group px-slide-x py-slide-y md:gap-[min(var(--spacing-group-lg),4.5vh)] md:px-slide-x-lg md:py-[min(var(--spacing-slide-y-lg),7vh)]">
           <Reveal effect="drop" className="flex flex-col gap-item md:gap-item-lg">
             <p className={cn('flex items-center gap-item text-sm font-medium uppercase tracking-[0.2em]', theme.accent)}>
               <span className="h-px w-8 bg-accent md:w-12" aria-hidden />
@@ -50,7 +50,7 @@ export function MentoriaIndividual() {
             <p className={cn('text-xs font-semibold uppercase tracking-[0.2em]', theme.muted)}>
               De R$19.997,00 por R$00,00
             </p>
-            <h2 className={cn('font-display text-4xl font-semibold text-balance md:text-5xl xl:text-6xl', theme.heading)}>
+            <h2 className={cn('font-display text-4xl font-semibold text-balance md:text-[clamp(2rem,6vh,3.75rem)] md:leading-[1.05]', theme.heading)}>
               <span className={theme.accent}>Mentoria Individual</span> com o Dr.&nbsp;Gustavo Sá
             </h2>
           </Reveal>
@@ -66,7 +66,7 @@ export function MentoriaIndividual() {
                     delay={steps ? 0 : 0.35 + index * 0.1}
                     visible={steps ? steps.step > index : undefined}
                   >
-                    <GlassCard className="gap-2 p-4 md:p-5">
+                    <GlassCard className="gap-2 p-4 md:p-[min(1.25rem,2.2vh)]">
                       <div className="flex items-center gap-4">
                         <span
                           className={cn('flex size-10 shrink-0 items-center justify-center rounded-full', theme.accentBg)}
@@ -74,7 +74,7 @@ export function MentoriaIndividual() {
                         >
                           <Icon className="size-5" />
                         </span>
-                        <p className={cn('text-lg leading-snug text-pretty md:text-xl', theme.text)}>{item.text}</p>
+                        <p className={cn('text-lg leading-snug text-pretty md:text-[clamp(1rem,2.3vh,1.25rem)]', theme.text)}>{item.text}</p>
                       </div>
                     </GlassCard>
                   </Reveal>
