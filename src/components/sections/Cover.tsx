@@ -1,13 +1,7 @@
-import { motion } from 'framer-motion'
-import { TbArrowRight } from 'react-icons/tb'
 import { COVER } from '@/config/content'
-import { SLIDE_THEME } from '@/lib/slide-theme'
-import { cn } from '@/lib/utils'
 import { Slide } from '@/components/ui/Slide'
 import { LogoReveal } from '@/components/ui/LogoReveal'
 import { DarkBackground } from '@/components/ui/DarkBackground'
-
-const theme = SLIDE_THEME.section
 
 const SYMBOL_COLORS = { 'cls-1': 'var(--color-section-text)' }
 // No fundo azul, o azul original do logotipo vira branco para manter a leitura
@@ -41,16 +35,6 @@ export function Cover() {
           className="w-64 md:w-md"
         />
       </div>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 4.2 }}
-        className={cn('absolute right-slide-x-lg bottom-slide-y-lg hidden items-center gap-2 text-sm md:flex', theme.muted)}
-      >
-        {COVER.hint}
-        <TbArrowRight className="size-4" aria-hidden />
-      </motion.p>
     </Slide>
   )
 }

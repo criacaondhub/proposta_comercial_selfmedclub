@@ -20,7 +20,6 @@ export const COVER = {
     viewBox: '0 0 1031.64 327.97',
     alt: 'SelfMedClub',
   },
-  hint: 'Clique nas setas para avançar',
 } as const
 
 export const ABOUT = {
